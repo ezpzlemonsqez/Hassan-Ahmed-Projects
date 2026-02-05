@@ -93,6 +93,17 @@
     .card .inner{padding:16px 16px 14px}
     .card h2{margin:0 0 8px; font-size:18px}
     .muted{color:var(--muted)}
+
+    /* NEW: section headers inside the projects list */
+    .section-title{
+      margin:16px 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--muted);
+    }
+    .section-title:first-of-type{ margin-top:6px; }
+
     .list{margin:10px 0 0; padding:0; list-style:none; display:grid; gap:10px}
     .item{
       padding:12px;
@@ -151,7 +162,6 @@
       </div>
 
       <div class="cta">
-        <!-- EDIT THESE LINKS -->
         <a class="btn primary" href="https://github.com/ezpzlemonsqez" target="_blank" rel="noopener">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/hassan-ahmed-72a840235/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:hassan23.anoor@gmail.com">Email</a>
@@ -162,32 +172,32 @@
       <section class="card col6">
         <div class="inner">
           <h2>Projects</h2>
-          <p class="muted">Grouped by theme. Links to slides/code can be added as each project is uploaded.</p>
+          <p class="muted">Grouped by theme. Add Slides/Code links as you upload each project.</p>
 
+          <!-- QUANT -->
+          <div class="section-title">Quantitative Finance Research</div>
           <ul class="list">
-            <!-- GROUP: QUANT FINANCE -->
-            <li class="item">
-              <div class="left">
-                <div class="name">Quantitative Finance Research</div>
-                <div class="desc">Research, modelling and backtesting across volatility, portfolio construction and derivatives.</div>
-              </div>
-              <div class="meta">
-                <span class="pill">Research</span>
-                <span class="pill">Backtesting</span>
-              </div>
-            </li>
-
             <li class="item">
               <div class="left">
                 <div class="name">Rough Volatility Estimation (MSc)</div>
-                <div class="desc">Implemented multiple roughness/Hurst estimators and validated behaviour via Monte-Carlo and intraday experiments.</div>
+                <div class="desc">Implemented roughness/Hurst estimators; validated behaviour via Monte-Carlo and intraday experiments.</div>
               </div>
               <div class="meta">
                 <span class="pill">Python</span>
                 <span class="pill">Stochastic</span>
                 <span class="pill">Slides</span>
-                <!-- later: <a class="pill" href="decks/rough-vol.pdf" target="_blank" rel="noopener">Slides</a> -->
-                <!-- later: <a class="pill" href="CODE_LINK" target="_blank" rel="noopener">Code</a> -->
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <div class="name">Portfolio Optimisation (CAPM-Informed Mean–Variance)</div>
+                <div class="desc">Estimated rolling betas/expected returns and solved a constrained optimisation workflow with evaluation and reporting.</div>
+              </div>
+              <div class="meta">
+                <span class="pill">Python</span>
+                <span class="pill">Portfolio</span>
+                <span class="pill">Slides</span>
               </div>
             </li>
 
@@ -202,43 +212,11 @@
                 <span class="pill">Slides</span>
               </div>
             </li>
+          </ul>
 
-            <li class="item">
-              <div class="left">
-                <div class="name">CAPM-Informed Mean–Variance Portfolio Optimisation</div>
-                <div class="desc">Estimated rolling betas/expected returns and solved a constrained optimisation workflow with evaluation and reporting.</div>
-              </div>
-              <div class="meta">
-                <span class="pill">Python</span>
-                <span class="pill">Portfolio</span>
-                <span class="pill">Slides</span>
-              </div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <div class="name">KPI Forecasting & Monitoring Diagnostics</div>
-                <div class="desc">ARIMA/regression forecasting with rolling evaluation, automated residual checks and monitoring-style reporting.</div>
-              </div>
-              <div class="meta">
-                <span class="pill">R</span>
-                <span class="pill">Time Series</span>
-                <span class="pill">Slides</span>
-              </div>
-            </li>
-
-            <!-- GROUP: RISK / RATES -->
-            <li class="item">
-              <div class="left">
-                <div class="name">Financial Mathematics & Risk (Rates / Liability)</div>
-                <div class="desc">Cashflow discounting, term-structure construction and sensitivity analysis for valuation and risk.</div>
-              </div>
-              <div class="meta">
-                <span class="pill">Rates</span>
-                <span class="pill">Sensitivity</span>
-              </div>
-            </li>
-
+          <!-- RISK -->
+          <div class="section-title">Financial Mathematics &amp; Risk</div>
+          <ul class="list">
             <li class="item">
               <div class="left">
                 <div class="name">Annuity Liability Valuation & Sensitivity</div>
@@ -262,19 +240,11 @@
                 <span class="pill">Slides</span>
               </div>
             </li>
+          </ul>
 
-            <!-- GROUP: DATA -->
-            <li class="item">
-              <div class="left">
-                <div class="name">Data Science & Analytics</div>
-                <div class="desc">Model building, evaluation, and decision analytics — focusing on clarity, diagnostics and measurable impact.</div>
-              </div>
-              <div class="meta">
-                <span class="pill">ML</span>
-                <span class="pill">Experimentation</span>
-              </div>
-            </li>
-
+          <!-- DATA -->
+          <div class="section-title">Data Science &amp; Analytics</div>
+          <ul class="list">
             <li class="item">
               <div class="left">
                 <div class="name">ML Model Development (Forecasting)</div>
@@ -299,7 +269,19 @@
               </div>
             </li>
 
+            <li class="item">
+              <div class="left">
+                <div class="name">KPI Forecasting & Monitoring Dashboard</div>
+                <div class="desc">ARIMA/regression forecasting with rolling evaluation, automated residual checks and monitoring-style reporting.</div>
+              </div>
+              <div class="meta">
+                <span class="pill">R</span>
+                <span class="pill">Time Series</span>
+                <span class="pill">Slides</span>
+              </div>
+            </li>
           </ul>
+
         </div>
       </section>
 
@@ -332,8 +314,12 @@
               <div class="left">
                 <div class="name">Contact</div>
                 <div class="desc">
-                  Email: <span class="k">hassan23.anoor@gmail.com</span><br/>
-                  LinkedIn: <span class="k">https://www.linkedin.com/in/hassan-ahmed-72a840235/</span>
+                  Email: <a class="k" href="mailto:hassan23.anoor@gmail.com">hassan23.anoor@gmail.com</a><br/>
+                  Phone: <a class="k" href="tel:+447861675974">+44 7861 675974</a><br/>
+                  LinkedIn:
+                  <a class="k" href="https://www.linkedin.com/in/hassan-ahmed-72a840235/" target="_blank" rel="noopener">
+                    linkedin.com/in/hassan-ahmed-72a840235
+                  </a>
                 </div>
               </div>
               <div class="meta"><span class="pill">Open to roles</span></div>
