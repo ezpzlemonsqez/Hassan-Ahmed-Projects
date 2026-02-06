@@ -94,15 +94,21 @@
     .card h2{margin:0 0 8px; font-size:18px}
     .muted{color:var(--muted)}
 
-    /* NEW: section headers inside the projects list */
+    /* section headers inside the projects list */
     .section-title{
-      margin:16px 0 10px;
+      margin:18px 0 10px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.08);
       font-size:12px;
       text-transform:uppercase;
       letter-spacing:.16em;
       color:var(--muted);
     }
-    .section-title:first-of-type{ margin-top:6px; }
+    .section-title:first-of-type{
+      border-top:none;
+      padding-top:0;
+      margin-top:6px;
+    }
 
     .list{margin:10px 0 0; padding:0; list-style:none; display:grid; gap:10px}
     .item{
@@ -115,7 +121,17 @@
     .item:hover{border-color: rgba(167,139,250,.40)}
     .item .left{display:flex; flex-direction:column; gap:4px; min-width:0}
     .item .name{font-weight:700}
-    .item .desc{color:var(--muted); font-size:14px}
+
+    /* clamp descriptions so the list scans fast */
+    .item .desc{
+      color:var(--muted);
+      font-size:14px;
+      display:-webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow:hidden;
+    }
+
     .item .meta{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
     .pill{
       font-size:12px;
@@ -174,8 +190,15 @@
           <h2>Projects</h2>
           <p class="muted">Grouped by theme. Add Slides/Code links as you upload each project.</p>
 
+          <!-- jump chips -->
+          <div class="badges" style="margin-top:10px">
+            <a class="badge" href="#quant">Quant</a>
+            <a class="badge" href="#risk">Maths &amp; Risk</a>
+            <a class="badge" href="#data">Data</a>
+          </div>
+
           <!-- QUANT -->
-          <div class="section-title">Quantitative Finance Research</div>
+          <div class="section-title" id="quant">Quantitative Finance Research</div>
           <ul class="list">
             <li class="item">
               <div class="left">
@@ -215,7 +238,7 @@
           </ul>
 
           <!-- RISK -->
-          <div class="section-title">Financial Mathematics &amp; Risk</div>
+          <div class="section-title" id="risk">Financial Mathematics &amp; Risk</div>
           <ul class="list">
             <li class="item">
               <div class="left">
@@ -243,7 +266,7 @@
           </ul>
 
           <!-- DATA -->
-          <div class="section-title">Data Science &amp; Analytics</div>
+          <div class="section-title" id="data">Data Science &amp; Analytics</div>
           <ul class="list">
             <li class="item">
               <div class="left">
@@ -339,6 +362,3 @@
   </script>
 </body>
 </html>
-
-
- 
