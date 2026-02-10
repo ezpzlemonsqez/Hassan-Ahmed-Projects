@@ -119,6 +119,10 @@
     }
     a.pill{color:var(--muted)}
     a.pill:hover{color:var(--text); border-color: rgba(96,165,250,.45)}
+
+    /* clickable project cards */
+    .item[data-href]{ cursor:pointer; }
+
     .col6{grid-column: span 12}
     @media (min-width: 900px){
       .col6{grid-column: span 6}
@@ -200,7 +204,7 @@
       <div class="title">
         <h1>Hassan Ahmed</h1>
         <p class="tagline">
-          Quantitative finance & analytics — I build and validate models end-to-end (data → research → backtests → reporting).
+          Quantitative finance &amp; analytics — I build and validate models end-to-end (data → research → backtests → reporting).
         </p>
 
         <div class="badges">
@@ -208,7 +212,7 @@
           <span class="badge">C++</span>
           <span class="badge">Time Series</span>
           <span class="badge">Derivatives</span>
-          <span class="badge">Risk & Scenario Analysis</span>
+          <span class="badge">Risk &amp; Scenario Analysis</span>
         </div>
       </div>
 
@@ -239,47 +243,46 @@
                   <span class="chev">›</span>
                 </div>
               </summary>
+
               <div class="acc-body">
                 <ul class="list">
-                  <li class="item">
+
+                  <!-- Rough Vol (MSc) -->
+                  <li class="item" data-href="projects/rough-volatility.html" tabindex="0" role="link">
                     <div class="left">
                       <div class="name">Rough Volatility Estimation (MSc)</div>
                       <div class="desc">Implemented roughness/Hurst estimators; validated behaviour via Monte-Carlo and intraday experiments.</div>
                     </div>
-
                     <div class="meta">
-                      <span class="pill">Python</span>
-                      <span class="pill">Stochastic</span>
                       <a class="pill" href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/blob/main/assets/FM50FinalCode.ipynb" target="_blank" rel="noopener">Code</a>
                       <a class="pill" href="projects/rough-volatility.html">PDF</a>
-
-                        
                     </div>
                   </li>
 
-                  <li class="item">
+                  <!-- Portfolio Optimisation -->
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
                       <div class="name">Portfolio Optimisation (CAPM-Informed Mean–Variance)</div>
                       <div class="desc">Estimated rolling betas/expected returns and solved a constrained optimisation workflow with evaluation and reporting.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">Python</span>
-                      <span class="pill">Portfolio</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
 
-                  <li class="item">
+                  <!-- Derivatives Pricing -->
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
-                      <div class="name">Derivatives Pricing & Greeks Engine</div>
+                      <div class="name">Derivatives Pricing &amp; Greeks Engine</div>
                       <div class="desc">Built a pricing workflow with Greeks and validation checks, with results summarised in a short technical deck.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">C++</span>
-                      <span class="pill">Derivatives</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
+
                 </ul>
               </div>
             </details>
@@ -296,31 +299,32 @@
                   <span class="chev">›</span>
                 </div>
               </summary>
+
               <div class="acc-body">
                 <ul class="list">
-                  <li class="item">
+
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
-                      <div class="name">Annuity Liability Valuation & Sensitivity</div>
+                      <div class="name">Annuity Liability Valuation &amp; Sensitivity</div>
                       <div class="desc">Modelled liability cashflows and valued via spot/forward curves; ran rate/inflation sensitivities and summarised impacts.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">Excel</span>
-                      <span class="pill">Valuation</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
 
-                  <li class="item">
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
-                      <div class="name">Yield Curve Construction & Spot/Forward Rates</div>
+                      <div class="name">Yield Curve Construction &amp; Spot/Forward Rates</div>
                       <div class="desc">Bootstrapped a spot curve from market instruments, derived forwards, and analysed PV/risk under curve shocks.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">Python</span>
-                      <span class="pill">Rates</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
+
                 </ul>
               </div>
             </details>
@@ -337,43 +341,43 @@
                   <span class="chev">›</span>
                 </div>
               </summary>
+
               <div class="acc-body">
                 <ul class="list">
-                  <li class="item">
+
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
                       <div class="name">ML Model Development (Forecasting)</div>
                       <div class="desc">Built and evaluated supervised models with a clean train/validation workflow and practical performance reporting.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">Python</span>
-                      <span class="pill">ML</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
 
-                  <li class="item">
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
-                      <div class="name">A/B Testing & Power Analysis</div>
+                      <div class="name">A/B Testing &amp; Power Analysis</div>
                       <div class="desc">Designed hypothesis tests, calculated power/sample sizes, and summarised outcomes in a decision-focused format.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">SAS</span>
-                      <span class="pill">Statistics</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
 
-                  <li class="item">
+                  <li class="item" data-href="ADD_YOUR_PDF_VIEWER_LINK_HERE" tabindex="0" role="link">
                     <div class="left">
-                      <div class="name">KPI Forecasting & Monitoring Dashboard</div>
+                      <div class="name">KPI Forecasting &amp; Monitoring Dashboard</div>
                       <div class="desc">ARIMA/regression forecasting with rolling evaluation, automated residual checks and monitoring-style reporting.</div>
                     </div>
                     <div class="meta">
-                      <span class="pill">R</span>
-                      <span class="pill">Time Series</span>
-                      <span class="pill">Slides</span>
+                      <a class="pill" href="ADD_YOUR_CODE_LINK_HERE" target="_blank" rel="noopener">Code</a>
+                      <a class="pill" href="ADD_YOUR_PDF_VIEWER_LINK_HERE">PDF</a>
                     </div>
                   </li>
+
                 </ul>
               </div>
             </details>
@@ -439,10 +443,24 @@
   const sections = Array.from(document.querySelectorAll("details.acc-item"));
   sections.forEach((d) => {
     d.addEventListener("toggle", () => {
-      if (!d.open) return; // only act when a section is opened
+      if (!d.open) return;
       sections.forEach((other) => {
         if (other !== d) other.open = false;
       });
+    });
+  });
+
+  // make project cards clickable (but don't hijack clicks on actual links)
+  document.querySelectorAll('.item[data-href]').forEach((item) => {
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      window.location.href = item.dataset.href;
+    });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = item.dataset.href;
+      }
     });
   });
 </script>
