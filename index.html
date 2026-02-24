@@ -120,6 +120,7 @@
     a.pill{color:var(--muted)}
     a.pill:hover{color:var(--text); border-color: rgba(96,165,250,.45)}
 
+    /* clickable project cards */
     .item[data-href]{ cursor:pointer; }
 
     .col6{grid-column: span 12}
@@ -135,6 +136,7 @@
     }
     .k{color:var(--text)}
 
+    /* Accordion (Projects) */
     .acc{margin-top:12px; display:grid; gap:10px}
     details.acc-item{
       border:1px solid rgba(255,255,255,.08);
@@ -252,7 +254,7 @@
                       <div class="desc">Implemented roughness/Hurst estimators; validated behaviour via Monte-Carlo and intraday experiments.</div>
                     </div>
                     <div class="meta">
-                      <a class="pill" href="projects/MSc%20Project/rough-volatility-code.html">Code</a>
+                      <a class="pill" href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/blob/main/projects/MSc%20Project/FM50FinalCode.ipynb" target="_blank" rel="noopener">Code</a>
                       <a class="pill" href="projects/MSc%20Project/rough-volatility.html">PDF</a>
                     </div>
                   </li>
@@ -434,8 +436,10 @@
   </div>
 
 <script>
+  // footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
+  // accordion: allow only one <details> open at a time
   const sections = Array.from(document.querySelectorAll("details.acc-item"));
   sections.forEach((d) => {
     d.addEventListener("toggle", () => {
@@ -446,6 +450,7 @@
     });
   });
 
+  // make project cards clickable (but don't hijack clicks on actual links)
   document.querySelectorAll('.item[data-href]').forEach((item) => {
     item.addEventListener('click', (e) => {
       if (e.target.closest('a')) return;
