@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bbg.cpp preview</title>
+
+  <!-- Highlight.js (syntax highlighting) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .wrap{padding:10px}
+    .header{
+      margin-bottom:10px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:12px;
+    }
+    pre{
+      margin:0;
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:auto;
+      background:var(--panel);
+      min-height: calc(100vh - 72px);
+    }
+    code{
+      display:block;
+      padding:14px;
+      font-size:12.5px;
+      line-height:1.45;
+      white-space:pre;
+    }
+    .err{
+      color:#fca5a5;
+      padding:12px;
+      border:1px solid rgba(252,165,165,.25);
+      border-radius:12px;
+      background:rgba(127,29,29,.15);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">src/bbg.cpp</div>
+    <pre><code id="code" class="language-cpp">Loading...</code></pre>
+    <div id="error" class="err" style="display:none; margin-top:10px;"></div>
+  </div>
+
+  <script>
+    const codeEl = document.getElementById("code");
+    const errEl = document.getElementById("error");
+
+    fetch("./code/CEV_BBG_Project/src/bbg.cpp")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
+      .then((text) => {
+        codeEl.textContent = text;
+        hljs.highlightElement(codeEl);
+      })
+      .catch((err) => {
+        codeEl.textContent = "";
+        errEl.style.display = "block";
+        errEl.innerHTML = `
+          Could not load <strong>src/bbg.cpp</strong> (${err.message}).<br>
+          Check that the file exists at:
+          <code>./code/CEV_BBG_Project/src/bbg.cpp</code>
+        `;
+      });
+  </script>
+</body>
+</html>
