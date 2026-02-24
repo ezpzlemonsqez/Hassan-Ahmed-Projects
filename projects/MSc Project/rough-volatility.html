@@ -1,34 +1,64 @@
-<!-- projects/MSc Project/rough-volatility.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rough Volatility Estimation (MSc) | Hassan Ahmed</title>
+  <title>Rough Volatility Estimation (MSc) — Code | Hassan Ahmed</title>
+
   <style>
-    :root{--bg:#0b0f17;--text:#e5e7eb;--muted:#9ca3af;--line:rgba(255,255,255,.10);--shadow:0 20px 60px rgba(0,0,0,.35);}
+    :root{
+      --bg:#0b0f17;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:18px}
     .top{
-      display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;
-      border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);
-      background:rgba(17,24,39,.65)
+      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+      box-shadow: var(--shadow);
+      background: rgba(17,24,39,.65);
     }
+    .title{display:flex; flex-direction:column; gap:2px}
+    .muted{color:var(--muted); font-size:13px}
     a.btn{
-      display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;
-      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
-      text-decoration:none;font-weight:700;font-size:14px
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
     }
-    a.btn:hover{background:rgba(255,255,255,.07)}
-    .title{display:flex;flex-direction:column;gap:2px}
-    .muted{color:var(--muted);font-size:13px}
+    a.btn:hover{background: rgba(255,255,255,.07)}
+
     .viewer{
-      margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;
-      background:rgba(17,24,39,.35);height:calc(100vh - 120px);min-height:520px
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background: rgba(17,24,39,.35);
+      height: calc(100vh - 120px);
+      min-height: 520px;
     }
-    iframe{width:100%;height:100%;border:0}
-    .fallback{margin-top:10px;color:var(--muted);font-size:13px}
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .fallback{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
     .fallback a{color:var(--text)}
   </style>
 </head>
@@ -36,22 +66,24 @@
   <div class="wrap">
     <div class="top">
       <div class="title">
-        <div style="font-weight:800;">Rough Volatility Estimation (MSc)</div>
-        <div class="muted">Embedded PDF viewer</div>
+        <div style="font-weight:800;">Rough Volatility Estimation (MSc) — Code</div>
+        <div class="muted">Embedded notebook (HTML export)</div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <a class="btn" href="../../index.html">← Back</a>
-        <a class="btn" href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/blob/main/projects/MSc%20Project/FM50FinalCode.ipynb" target="_blank" rel="noopener">Code</a>
-        <a class="btn" href="./FM50_FINAL.pdf" target="_blank" rel="noopener">Open PDF</a>
+        <a class="btn" href="./FM50FinalCode.html" target="_blank" rel="noopener">Open Code</a>
+        <a class="btn" href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/blob/main/projects/MSc%20Project/FM50FinalCode.ipynb" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
 
     <div class="viewer">
-      <iframe src="./FM50_FINAL.pdf#view=FitH"></iframe>
+      <iframe src="./FM50FinalCode.html"></iframe>
     </div>
 
     <div class="fallback">
-      If the embed doesn’t load on your device, use <a href="./FM50_FINAL.pdf" target="_blank" rel="noopener">Open PDF</a>.
+      If the preview doesn’t load, use <a href="./FM50FinalCode.html" target="_blank" rel="noopener">Open Code</a>
+      or <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/blob/main/projects/MSc%20Project/FM50FinalCode.ipynb" target="_blank" rel="noopener">GitHub</a>.
     </div>
   </div>
 </body>
