@@ -120,7 +120,6 @@
     a.pill{color:var(--muted)}
     a.pill:hover{color:var(--text); border-color: rgba(96,165,250,.45)}
 
-    /* clickable project cards */
     .item[data-href]{ cursor:pointer; }
 
     .col6{grid-column: span 12}
@@ -136,7 +135,6 @@
     }
     .k{color:var(--text)}
 
-    /* Accordion (Projects) */
     .acc{margin-top:12px; display:grid; gap:10px}
     details.acc-item{
       border:1px solid rgba(255,255,255,.08);
@@ -436,10 +434,8 @@
   </div>
 
 <script>
-  // footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  // accordion: allow only one <details> open at a time
   const sections = Array.from(document.querySelectorAll("details.acc-item"));
   sections.forEach((d) => {
     d.addEventListener("toggle", () => {
@@ -450,7 +446,6 @@
     });
   });
 
-  // make project cards clickable (but don't hijack clicks on actual links)
   document.querySelectorAll('.item[data-href]').forEach((item) => {
     item.addEventListener('click', (e) => {
       if (e.target.closest('a')) return;
