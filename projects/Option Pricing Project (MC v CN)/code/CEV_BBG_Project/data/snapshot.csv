@@ -1,0 +1,2 @@
+asof_utc,underlying,spot,currency,dividend_yield_raw,dividend_yield,dividend_yield_method,source
+2026-02-18T02:59:31+00:00,SPY,682.8499755859375,USD,1.05,0.0105,dividendYield (scaled if >1),Yahoo Finance via yfinance
