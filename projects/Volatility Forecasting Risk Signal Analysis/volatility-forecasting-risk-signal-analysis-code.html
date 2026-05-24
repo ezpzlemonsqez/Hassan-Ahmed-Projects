@@ -4,80 +4,1474 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Volatility Forecasting &amp; Risk Signal Analysis | Code</title>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+
   <style>
     :root{
-      --bg:#0b0f17; --card:#111827; --card2:#0f172a; --text:#e5e7eb;
-      --muted:#9ca3af; --line:rgba(255,255,255,.10); --accent:#60a5fa;
-      --accent2:#a78bfa; --shadow:0 20px 60px rgba(0,0,0,.35);
+      --bg:#0b0f17;
+      --card:#111827;
+      --card2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --accent:#60a5fa;
+      --accent2:#a78bfa;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:radial-gradient(1000px 600px at 10% 0%,rgba(96,165,250,.18),transparent 60%),radial-gradient(900px 500px at 90% 10%,rgba(167,139,250,.16),transparent 60%),var(--bg);line-height:1.55}
-    a{color:inherit;text-decoration:none} a:hover{color:var(--accent)}
-    .wrap{max-width:1150px;margin:0 auto;padding:26px 18px 44px}
-    header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(17,24,39,.85),rgba(15,23,42,.72));box-shadow:var(--shadow)}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 10% 0%,rgba(96,165,250,.18),transparent 60%),
+        radial-gradient(900px 500px at 90% 10%,rgba(167,139,250,.16),transparent 60%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{color:var(--accent)}
+    .wrap{max-width:1180px;margin:0 auto;padding:26px 18px 56px}
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,rgba(17,24,39,.88),rgba(15,23,42,.72));
+      box-shadow:var(--shadow);
+    }
     h1{margin:0;font-size:clamp(24px,3vw,36px)}
-    .tagline{margin:7px 0 0;color:var(--muted);max-width:78ch}
+    .tagline{margin:7px 0 0;color:var(--muted);max-width:82ch}
     .cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .btn{display:inline-flex;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:650;font-size:14px}
+    .btn,.copy-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:650;
+      font-size:14px;
+      cursor:pointer;
+      font-family:inherit;
+    }
     .btn.primary{background:linear-gradient(90deg,rgba(96,165,250,.18),rgba(167,139,250,.16));border-color:rgba(96,165,250,.45)}
-    .card{margin-top:16px;border:1px solid var(--line);border-radius:18px;background:rgba(17,24,39,.78);box-shadow:0 12px 40px rgba(0,0,0,.25);overflow:hidden}
-    .inner{padding:16px} .muted{color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
-    .item{grid-column:span 12;padding:14px;border-radius:15px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035)}
-    @media(min-width:800px){.item.col4{grid-column:span 4}.item.col6{grid-column:span 6}}
-    .name{font-weight:800;margin-bottom:5px}.desc{color:var(--muted);font-size:14px}
-    .pill{display:inline-flex;margin-top:10px;margin-right:8px;font-size:12px;padding:5px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.10);color:var(--muted);background:rgba(255,255,255,.03)}
-    .viewer{height:78vh;width:100%;border:0;background:#111827;border-radius:0 0 18px 18px}
-    pre{margin:0;white-space:pre;overflow:auto;border-radius:0 0 18px 18px;background:#0d1117!important;min-height:70vh}
+    .btn:hover,.copy-btn:hover{border-color:rgba(96,165,250,.55);background:rgba(96,165,250,.08);color:var(--text)}
+    .btn.small,.copy-btn{padding:7px 10px;border-radius:10px;font-size:12px}
+    .panel{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(17,24,39,.78);
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .inner{padding:16px}
+    .muted{color:var(--muted)}
+    .quick-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+    }
+    .pill:hover{color:var(--text);border-color:rgba(96,165,250,.45)}
+    .run-box{margin-top:12px}
+    .run-box pre{border-radius:14px;min-height:auto}
+    .code-card{
+      margin-top:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(17,24,39,.82);
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .code-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding:15px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.025);
+    }
+    .code-head h2{margin:0 0 4px;font-size:18px}
+    .code-head p{margin:0;color:var(--muted);font-size:14px;max-width:78ch}
+    .code-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    pre{
+      margin:0;
+      white-space:pre;
+      overflow:auto;
+      background:#0d1117!important;
+      max-height:78vh;
+      border-radius:0;
+    }
     code{font-size:13px;line-height:1.55}
-</style>
+    .hljs{background:#0d1117!important}
+    @media(max-width:760px){
+      header,.code-head{flex-direction:column}
+      .cta,.code-actions{justify-content:flex-start}
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
+    <header>
+      <div>
+        <h1>Volatility Forecasting &amp; Risk Signal Analysis — Code</h1>
+        <p class="tagline">The three R scripts used in the project are shown below on one page. They build the rolling model outputs, finish the diagnostics and forecasts, then create the final report tables and figures.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="../../index.html">Portfolio</a>
+        <a class="btn primary" href="volatility-forecasting-risk-signal-analysis.html">PDF</a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="inner">
+        <h2 style="margin:0 0 8px">Run order</h2>
+        <p class="muted" style="margin:0">Run the files from the project root after the data file has been downloaded into <code>data/raw/vix_fred.csv</code>.</p>
+        <div class="quick-links">
+          <a class="pill" href="#01-build-core-outputs-R">01 build core outputs</a>
+          <a class="pill" href="#02-fast-finish-R">02 fast finish</a>
+          <a class="pill" href="#03-create-final-report-outputs-R">03 final report outputs</a>
+        </div>
+        <div class="run-box">
+          <pre><code class="language-r">source(&quot;code/01_build_core_outputs.R&quot;)
+source(&quot;code/02_fast_finish.R&quot;)
+source(&quot;code/03_create_final_report_outputs.R&quot;)</code></pre>
+        </div>
+      </div>
+    </section>
+
     
-<header>
-  <div>
-    <h1>Volatility Forecasting &amp; Risk Signal Analysis — Code</h1>
-    <p class="tagline">Three R scripts are used: one to build the rolling model outputs, one to finish diagnostics and forecasts, and one to create report-ready tables and figures.</p>
-  </div>
-  <div class="cta">
-    <a class="btn" href="../../index.html">Portfolio</a>
-    <a class="btn primary" href="volatility-forecasting-risk-signal-analysis.html">PDF</a>
-  </div>
-</header>
+    <section class="code-card" id="01-build-core-outputs-R">
+      <div class="code-head">
+        <div>
+          <h2>01_build_core_outputs.R</h2>
+          <p>Cleans the VIX data, builds features and risk signals, then runs the rolling ARIMA/regression backtest.</p>
+        </div>
+        <div class="code-actions">
+          <button class="copy-btn" data-copy="01_build_core_outputs.R">Copy</button>
+          <a class="btn small" href="code/01_build_core_outputs.R">Raw file</a>
+        </div>
+      </div>
+      <pre><code id="01_build_core_outputs.R" class="language-r">############################################################
+# Volatility Forecasting &amp; Risk Signal Analysis | VIX Index
+# Language: R
+#
+# Purpose:
+# - Download and clean daily VIX data
+# - Forecast log-VIX using ARIMA and regression models
+# - Perform rolling out-of-sample evaluation
+# - Generate prediction intervals
+# - Run residual diagnostics: ACF, PACF, Ljung-Box
+# - Build risk signals and analyse regime shifts
+############################################################
 
-<section class="grid">
-  <article class="item col4">
-    <div class="name">01_build_core_outputs.R</div>
-    <div class="desc">Cleans the VIX data, builds model features, creates risk signals, runs rolling ARIMA/regression forecasts and saves model comparison outputs.</div>
-    <a class="pill" href="01-build-core-outputs-r-preview.html">Preview</a>
-    <a class="pill" href="code/01_build_core_outputs.R">Raw code</a>
-  </article>
-  <article class="item col4">
-    <div class="name">02_fast_finish.R</div>
-    <div class="desc">Creates the final ARIMA forecast, regression diagnostics, Ljung-Box tests, residual plots and supporting summary outputs.</div>
-    <a class="pill" href="02-fast-finish-r-preview.html">Preview</a>
-    <a class="pill" href="code/02_fast_finish.R">Raw code</a>
-  </article>
-  <article class="item col4">
-    <div class="name">03_create_final_report_outputs.R</div>
-    <div class="desc">Creates the final report tables, six report figures, results summary and output manifest.</div>
-    <a class="pill" href="03-create-final-report-outputs-r-preview.html">Preview</a>
-    <a class="pill" href="code/03_create_final_report_outputs.R">Raw code</a>
-  </article>
-</section>
+############################
+# 1. Setup
+############################
 
-<section class="card">
-  <div class="inner">
-    <h2>Run order</h2>
-    <p class="muted">From the project root in R:</p>
-    <pre><code>source("scripts/build_core_outputs.R")
-source("scripts/fast_finish.R")
-source("scripts/create_final_report_outputs.R")</code></pre>
-  </div>
-</section>
+required_packages &lt;- c(
+  &quot;readr&quot;, &quot;dplyr&quot;, &quot;tidyr&quot;, &quot;lubridate&quot;, &quot;ggplot2&quot;,
+  &quot;zoo&quot;, &quot;forecast&quot;, &quot;broom&quot;, &quot;strucchange&quot;
+)
+
+installed &lt;- rownames(installed.packages())
+missing &lt;- setdiff(required_packages, installed)
+
+if (length(missing) &gt; 0) {
+  install.packages(missing, repos = &quot;https://cloud.r-project.org&quot;)
+}
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(ggplot2)
+library(zoo)
+library(forecast)
+#library(MASS)
+library(broom)
+library(strucchange)
+
+set.seed(123)
+
+dir.create(&quot;data/raw&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;data/processed&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/plots&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/tables&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/models&quot;, recursive = TRUE, showWarnings = FALSE)
+
+fred_url &lt;- &quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&quot;
+raw_file &lt;- &quot;data/raw/vix_fred.csv&quot;
+
+if (!file.exists(raw_file)) {
+  download.file(fred_url, raw_file, mode = &quot;wb&quot;)
+}
+
+############################
+# 2. Load and clean VIX data
+############################
+
+raw_vix &lt;- read_csv(raw_file, show_col_types = FALSE)
+
+vix &lt;- raw_vix %&gt;%
+  rename(
+    date = observation_date,
+    vix_raw = VIXCLS
+  ) %&gt;%
+  mutate(
+    vix = as.numeric(na_if(as.character(vix_raw), &quot;.&quot;)),
+    log_vix = log(vix)
+  ) %&gt;%
+  dplyr::select(date, vix, log_vix) %&gt;%
+  filter(!is.na(vix), vix &gt; 0) %&gt;%
+  arrange(date) %&gt;%
+  mutate(
+    row_id = row_number(),
+    dlog_vix = log_vix - lag(log_vix)
+  )
+
+write_csv(vix, &quot;data/processed/vix_clean.csv&quot;)
+
+cat(&quot;Clean VIX observations:&quot;, nrow(vix), &quot;\n&quot;)
+cat(&quot;Start date:&quot;, as.character(min(vix$date)), &quot;\n&quot;)
+cat(&quot;End date:&quot;, as.character(max(vix$date)), &quot;\n&quot;)
+
+############################
+# 3. Feature engineering
+############################
+
+roll_mean &lt;- function(x, n) {
+  zoo::rollapply(x, width = n, FUN = mean, fill = NA, align = &quot;right&quot;, na.rm = TRUE)
+}
+
+roll_sd &lt;- function(x, n) {
+  zoo::rollapply(x, width = n, FUN = sd, fill = NA, align = &quot;right&quot;, na.rm = TRUE)
+}
+
+roll_quantile &lt;- function(x, n, p) {
+  zoo::rollapply(
+    x,
+    width = n,
+    FUN = function(z) quantile(z, probs = p, na.rm = TRUE),
+    fill = NA,
+    align = &quot;right&quot;
+  )
+}
+
+model_df &lt;- vix %&gt;%
+  mutate(
+    log_lag1 = lag(log_vix),
+    dlog_lag1 = lag(dlog_vix),
+
+    ma5_lag1 = lag(roll_mean(log_vix, 5)),
+    ma21_lag1 = lag(roll_mean(log_vix, 21)),
+    ma63_lag1 = lag(roll_mean(log_vix, 63)),
+
+    sd21_lag1 = lag(roll_sd(log_vix, 21)),
+    sd63_lag1 = lag(roll_sd(log_vix, 63)),
+
+    vix_q75_252_lag1 = lag(roll_quantile(vix, 252, 0.75)),
+    vix_q90_252_lag1 = lag(roll_quantile(vix, 252, 0.90)),
+
+    stress_lag1 = if_else(lag(vix) &gt;= vix_q90_252_lag1, 1, 0, missing = 0),
+    elevated_lag1 = if_else(lag(vix) &gt;= vix_q75_252_lag1, 1, 0, missing = 0),
+
+    trend = row_number()
+  )
+
+write_csv(model_df, &quot;data/processed/vix_model_features.csv&quot;)
+
+############################
+# 4. Risk signal construction
+############################
+
+signal_df &lt;- model_df %&gt;%
+  mutate(
+    rolling_mean_252 = roll_mean(vix, 252),
+    rolling_sd_252 = roll_sd(vix, 252),
+    z_252 = (vix - rolling_mean_252) / rolling_sd_252,
+
+    risk_signal = case_when(
+      !is.na(vix_q90_252_lag1) &amp; vix &gt;= vix_q90_252_lag1 ~ &quot;Stress&quot;,
+      !is.na(vix_q75_252_lag1) &amp; vix &gt;= vix_q75_252_lag1 ~ &quot;Elevated&quot;,
+      TRUE ~ &quot;Normal&quot;
+    )
+  )
+
+write_csv(signal_df, &quot;outputs/tables/vix_risk_signals.csv&quot;)
+
+latest_signal &lt;- signal_df %&gt;%
+  filter(!is.na(risk_signal)) %&gt;%
+  slice_tail(n = 1) %&gt;%
+  dplyr::select(date, vix, risk_signal, z_252, vix_q75_252_lag1, vix_q90_252_lag1)
+
+write_csv(latest_signal, &quot;outputs/tables/latest_risk_signal.csv&quot;)
+
+############################
+# 5. Plots: VIX and signals
+############################
+
+p_vix &lt;- ggplot(signal_df, aes(x = date, y = vix)) +
+  geom_line(linewidth = 0.35) +
+  geom_line(aes(y = vix_q75_252_lag1), linetype = &quot;dashed&quot;, linewidth = 0.3, na.rm = TRUE) +
+  geom_line(aes(y = vix_q90_252_lag1), linetype = &quot;dotted&quot;, linewidth = 0.3, na.rm = TRUE) +
+  labs(
+    title = &quot;VIX Index with Rolling Risk Thresholds&quot;,
+    subtitle = &quot;Dashed = rolling 75th percentile, dotted = rolling 90th percentile&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;
+  ) +
+  theme_minimal()
+
+ggsave(&quot;outputs/plots/vix_with_risk_thresholds.png&quot;, p_vix, width = 10, height = 5, dpi = 300)
+
+p_signal &lt;- signal_df %&gt;%
+  filter(date &gt;= max(date) - years(5)) %&gt;%
+  ggplot(aes(x = date, y = vix, colour = risk_signal)) +
+  geom_line(linewidth = 0.5) +
+  labs(
+    title = &quot;Recent VIX Risk Signal Classification&quot;,
+    subtitle = &quot;Normal, Elevated and Stress regimes based on rolling thresholds&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;,
+    colour = &quot;Signal&quot;
+  ) +
+  theme_minimal()
+
+ggsave(&quot;outputs/plots/recent_vix_risk_signals.png&quot;, p_signal, width = 10, height = 5, dpi = 300)
+
+############################
+# 6. Rolling evaluation setup
+############################
+
+# Default: evaluate over last 3 years using a 5-year rolling training window.
+# Increase evaluation_years to 5 if you want a heavier, more complete backtest.
+
+evaluation_years &lt;- 3
+rolling_window_years &lt;- 5
+trading_days &lt;- 252
+
+rolling_window &lt;- rolling_window_years * trading_days
+eval_start_date &lt;- max(vix$date) - years(evaluation_years)
+
+eval_indices &lt;- which(vix$date &gt;= eval_start_date &amp; vix$row_id &gt; rolling_window + 100)
+
+cat(&quot;Rolling evaluation observations:&quot;, length(eval_indices), &quot;\n&quot;)
+
+############################
+# 7. AIC-selected regression specification
+############################
+
+feature_cols &lt;- c(
+  &quot;log_lag1&quot;, &quot;dlog_lag1&quot;,
+  &quot;ma5_lag1&quot;, &quot;ma21_lag1&quot;, &quot;ma63_lag1&quot;,
+  &quot;sd21_lag1&quot;, &quot;sd63_lag1&quot;,
+  &quot;stress_lag1&quot;, &quot;elevated_lag1&quot;,
+  &quot;trend&quot;
+)
+
+selector_data &lt;- model_df %&gt;%
+  filter(date &lt; eval_start_date) %&gt;%
+  dplyr::select(log_vix, all_of(feature_cols)) %&gt;%
+  drop_na()
+
+full_formula &lt;- as.formula(
+  paste(&quot;log_vix ~&quot;, paste(feature_cols, collapse = &quot; + &quot;))
+)
+
+full_lm &lt;- lm(full_formula, data = selector_data)
+
+# Stepwise AIC selection gives a parsimonious regression model.
+selected_lm &lt;- step(full_lm, direction = &quot;both&quot;, trace = 0)
+selected_formula &lt;- formula(selected_lm)
+
+cat(&quot;Selected regression formula:\n&quot;)
+print(selected_formula)
+
+saveRDS(selected_lm, &quot;outputs/models/selected_regression_model.rds&quot;)
+
+regression_summary &lt;- capture.output(summary(selected_lm))
+writeLines(regression_summary, &quot;outputs/tables/selected_regression_summary.txt&quot;)
+
+############################
+# 8. Rolling ARIMA and regression forecasts
+############################
+
+rolling_results &lt;- list()
+
+for (k in seq_along(eval_indices)) {
+
+  i &lt;- eval_indices[k]
+
+  train_start &lt;- max(1, i - rolling_window)
+  train_end &lt;- i - 1
+
+  train_y &lt;- vix$log_vix[train_start:train_end]
+  actual_log &lt;- vix$log_vix[i]
+  actual_vix &lt;- vix$vix[i]
+  forecast_date &lt;- vix$date[i]
+
+  # -------------------------
+  # ARIMA model
+  # -------------------------
+  arima_out &lt;- tryCatch({
+
+    fit_arima &lt;- auto.arima(
+      train_y,
+      seasonal = FALSE,
+      ic = &quot;aicc&quot;,
+      stepwise = TRUE,
+      approximation = TRUE
+    )
+
+    fc &lt;- forecast(fit_arima, h = 1, level = c(80, 95))
+
+    tibble(
+      arima_order = paste0(&quot;ARIMA(&quot;, paste(arimaorder(fit_arima), collapse = &quot;,&quot;), &quot;)&quot;),
+      arima_mean_log = as.numeric(fc$mean[1]),
+      arima_lower80_log = as.numeric(fc$lower[1, &quot;80%&quot;]),
+      arima_upper80_log = as.numeric(fc$upper[1, &quot;80%&quot;]),
+      arima_lower95_log = as.numeric(fc$lower[1, &quot;95%&quot;]),
+      arima_upper95_log = as.numeric(fc$upper[1, &quot;95%&quot;])
+    )
+
+  }, error = function(e) {
+    tibble(
+      arima_order = NA_character_,
+      arima_mean_log = NA_real_,
+      arima_lower80_log = NA_real_,
+      arima_upper80_log = NA_real_,
+      arima_lower95_log = NA_real_,
+      arima_upper95_log = NA_real_
+    )
+  })
+
+  # -------------------------
+  # Regression model
+  # -------------------------
+  train_reg &lt;- model_df %&gt;%
+    filter(row_id &gt;= train_start, row_id &lt;= train_end) %&gt;%
+    dplyr::select(log_vix, all_of(feature_cols)) %&gt;%
+    drop_na()
+
+  test_reg &lt;- model_df %&gt;%
+    filter(row_id == i) %&gt;%
+    dplyr::select(all_of(feature_cols))
+
+  reg_out &lt;- tryCatch({
+
+    fit_reg &lt;- lm(selected_formula, data = train_reg)
+
+    pred95 &lt;- predict(
+      fit_reg,
+      newdata = test_reg,
+      interval = &quot;prediction&quot;,
+      level = 0.95
+    )
+
+    pred80 &lt;- predict(
+      fit_reg,
+      newdata = test_reg,
+      interval = &quot;prediction&quot;,
+      level = 0.80
+    )
+
+    tibble(
+      reg_mean_log = as.numeric(pred95[1, &quot;fit&quot;]),
+      reg_lower80_log = as.numeric(pred80[1, &quot;lwr&quot;]),
+      reg_upper80_log = as.numeric(pred80[1, &quot;upr&quot;]),
+      reg_lower95_log = as.numeric(pred95[1, &quot;lwr&quot;]),
+      reg_upper95_log = as.numeric(pred95[1, &quot;upr&quot;])
+    )
+
+  }, error = function(e) {
+    tibble(
+      reg_mean_log = NA_real_,
+      reg_lower80_log = NA_real_,
+      reg_upper80_log = NA_real_,
+      reg_lower95_log = NA_real_,
+      reg_upper95_log = NA_real_
+    )
+  })
+
+  rolling_results[[k]] &lt;- bind_cols(
+    tibble(
+      date = forecast_date,
+      actual_log = actual_log,
+      actual_vix = actual_vix
+    ),
+    arima_out,
+    reg_out
+  )
+
+  if (k %% 50 == 0) {
+    cat(&quot;Completed rolling forecast&quot;, k, &quot;of&quot;, length(eval_indices), &quot;\n&quot;)
+  }
+}
+
+rolling_results &lt;- bind_rows(rolling_results) %&gt;%
+  mutate(
+    arima_mean_vix = exp(arima_mean_log),
+    arima_lower80_vix = exp(arima_lower80_log),
+    arima_upper80_vix = exp(arima_upper80_log),
+    arima_lower95_vix = exp(arima_lower95_log),
+    arima_upper95_vix = exp(arima_upper95_log),
+
+    reg_mean_vix = exp(reg_mean_log),
+    reg_lower80_vix = exp(reg_lower80_log),
+    reg_upper80_vix = exp(reg_upper80_log),
+    reg_lower95_vix = exp(reg_lower95_log),
+    reg_upper95_vix = exp(reg_upper95_log)
+  )
+
+write_csv(rolling_results, &quot;outputs/tables/rolling_forecasts.csv&quot;)
+
+############################
+# 9. Model evaluation metrics
+############################
+
+metric_calc &lt;- function(data, model_prefix) {
+
+  mean_col &lt;- paste0(model_prefix, &quot;_mean_log&quot;)
+  lower95_col &lt;- paste0(model_prefix, &quot;_lower95_log&quot;)
+  upper95_col &lt;- paste0(model_prefix, &quot;_upper95_log&quot;)
+
+  mean_vix_col &lt;- paste0(model_prefix, &quot;_mean_vix&quot;)
+  lower95_vix_col &lt;- paste0(model_prefix, &quot;_lower95_vix&quot;)
+  upper95_vix_col &lt;- paste0(model_prefix, &quot;_upper95_vix&quot;)
+
+  data %&gt;%
+    filter(!is.na(.data[[mean_col]])) %&gt;%
+    summarise(
+      model = model_prefix,
+
+      rmse_log = sqrt(mean((actual_log - .data[[mean_col]])^2)),
+      mae_log = mean(abs(actual_log - .data[[mean_col]])),
+
+      rmse_vix = sqrt(mean((actual_vix - .data[[mean_vix_col]])^2)),
+      mae_vix = mean(abs(actual_vix - .data[[mean_vix_col]])),
+
+      mape_vix = mean(abs((actual_vix - .data[[mean_vix_col]]) / actual_vix)) * 100,
+
+      coverage_95_log = mean(actual_log &gt;= .data[[lower95_col]] &amp;
+                               actual_log &lt;= .data[[upper95_col]]),
+
+      coverage_95_vix = mean(actual_vix &gt;= .data[[lower95_vix_col]] &amp;
+                               actual_vix &lt;= .data[[upper95_vix_col]]),
+
+      n_forecasts = n()
+    )
+}
+
+model_comparison &lt;- bind_rows(
+  metric_calc(rolling_results, &quot;arima&quot;),
+  metric_calc(rolling_results, &quot;reg&quot;)
+)
+
+write_csv(model_comparison, &quot;outputs/tables/model_comparison.csv&quot;)
+
+print(model_comparison)
+
+
+cat(&#x27;\nCore rolling outputs complete.\n&#x27;)
+cat(&#x27;Next run: source(&quot;scripts/fast_finish.R&quot;)\n&#x27;)
+cat(&#x27;Then run: source(&quot;scripts/create_final_report_outputs.R&quot;)\n&#x27;)
+</code></pre>
+    </section>
+
+    <section class="code-card" id="02-fast-finish-R">
+      <div class="code-head">
+        <div>
+          <h2>02_fast_finish.R</h2>
+          <p>Creates the final forecast, residual checks, Ljung-Box table and supporting model outputs.</p>
+        </div>
+        <div class="code-actions">
+          <button class="copy-btn" data-copy="02_fast_finish.R">Copy</button>
+          <a class="btn small" href="code/02_fast_finish.R">Raw file</a>
+        </div>
+      </div>
+      <pre><code id="02_fast_finish.R" class="language-r">
+############################################################
+# Fast finishing script for VIX project
+# Run after the rolling evaluation has already completed.
+############################################################
+
+library(readr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(forecast)
+library(strucchange)
+
+dir.create(&quot;outputs/plots&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/tables&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/models&quot;, recursive = TRUE, showWarnings = FALSE)
+
+vix &lt;- read_csv(&quot;data/processed/vix_clean.csv&quot;, show_col_types = FALSE)
+model_df &lt;- read_csv(&quot;data/processed/vix_model_features.csv&quot;, show_col_types = FALSE)
+rolling_results &lt;- read_csv(&quot;outputs/tables/rolling_forecasts.csv&quot;, show_col_types = FALSE)
+
+vix$date &lt;- as.Date(vix$date)
+model_df$date &lt;- as.Date(model_df$date)
+rolling_results$date &lt;- as.Date(rolling_results$date)
+
+cat(&quot;Loaded processed data.\n&quot;)
+
+############################################################
+# 1. Rolling forecast comparison plot
+############################################################
+
+plot_df &lt;- rolling_results %&gt;%
+  filter(date &gt;= max(date) - years(1))
+
+p_forecasts &lt;- ggplot(plot_df, aes(x = date)) +
+  geom_line(aes(y = actual_vix), linewidth = 0.5) +
+  geom_line(aes(y = arima_mean_vix), linetype = &quot;dashed&quot;, linewidth = 0.45, na.rm = TRUE) +
+  geom_line(aes(y = reg_mean_vix), linetype = &quot;dotted&quot;, linewidth = 0.45, na.rm = TRUE) +
+  labs(
+    title = &quot;Rolling One-Day-Ahead VIX Forecasts&quot;,
+    subtitle = &quot;Actual VIX vs ARIMA and AIC-selected regression forecasts&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;
+  ) +
+  theme_minimal()
+
+ggsave(&quot;outputs/plots/rolling_forecast_comparison.png&quot;, p_forecasts, width = 10, height = 5, dpi = 300)
+
+cat(&quot;Saved rolling forecast plot.\n&quot;)
+
+############################################################
+# 2. Fast final ARIMA forecast
+############################################################
+
+# Use recent 5 years for final forecasting to avoid slow full-sample exhaustive search.
+recent_vix &lt;- vix %&gt;%
+  filter(date &gt;= max(date) - years(5))
+
+final_arima &lt;- auto.arima(
+  recent_vix$log_vix,
+  seasonal = FALSE,
+  ic = &quot;aicc&quot;,
+  stepwise = TRUE,
+  approximation = TRUE,
+  max.p = 3,
+  max.q = 3,
+  max.d = 1
+)
+
+saveRDS(final_arima, &quot;outputs/models/final_arima_model_fast.rds&quot;)
+
+final_arima_summary &lt;- capture.output(summary(final_arima))
+writeLines(final_arima_summary, &quot;outputs/tables/final_arima_summary.txt&quot;)
+
+next_business_days &lt;- function(last_date, n) {
+  candidate_dates &lt;- seq.Date(last_date + days(1), by = &quot;day&quot;, length.out = n * 3)
+  business_dates &lt;- candidate_dates[!(weekdays(candidate_dates) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;))]
+  head(business_dates, n)
+}
+
+h &lt;- 20
+future_dates &lt;- next_business_days(max(vix$date), h)
+
+arima_fc &lt;- forecast(final_arima, h = h, level = c(80, 95))
+
+final_forecast &lt;- tibble(
+  date = future_dates,
+  mean_log = as.numeric(arima_fc$mean),
+  lower80_log = as.numeric(arima_fc$lower[, &quot;80%&quot;]),
+  upper80_log = as.numeric(arima_fc$upper[, &quot;80%&quot;]),
+  lower95_log = as.numeric(arima_fc$lower[, &quot;95%&quot;]),
+  upper95_log = as.numeric(arima_fc$upper[, &quot;95%&quot;])
+) %&gt;%
+  mutate(
+    mean_vix = exp(mean_log),
+    lower80_vix = exp(lower80_log),
+    upper80_vix = exp(upper80_log),
+    lower95_vix = exp(lower95_log),
+    upper95_vix = exp(upper95_log)
+  )
+
+write_csv(final_forecast, &quot;outputs/tables/final_arima_20_day_forecast.csv&quot;)
+
+p_final_fc &lt;- ggplot() +
+  geom_line(
+    data = vix %&gt;% filter(date &gt;= max(date) - years(2)),
+    aes(x = date, y = vix),
+    linewidth = 0.45
+  ) +
+  geom_line(
+    data = final_forecast,
+    aes(x = date, y = mean_vix),
+    linetype = &quot;dashed&quot;,
+    linewidth = 0.55
+  ) +
+  geom_ribbon(
+    data = final_forecast,
+    aes(x = date, ymin = lower95_vix, ymax = upper95_vix),
+    alpha = 0.2
+  ) +
+  labs(
+    title = &quot;Final 20-Trading-Day VIX Forecast&quot;,
+    subtitle = &quot;Fast ARIMA forecast using recent five-year log-VIX history with 95% prediction interval&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;
+  ) +
+  theme_minimal()
+
+ggsave(&quot;outputs/plots/final_arima_20_day_forecast.png&quot;, p_final_fc, width = 10, height = 5, dpi = 300)
+
+cat(&quot;Saved final ARIMA forecast.\n&quot;)
+
+############################################################
+# 3. Final regression diagnostics
+############################################################
+
+selected_formula &lt;- log_vix ~ log_lag1 + ma5_lag1 + ma21_lag1 + ma63_lag1 + stress_lag1 + elevated_lag1
+
+final_reg_data &lt;- model_df %&gt;%
+  dplyr::select(
+    log_vix,
+    log_lag1,
+    ma5_lag1,
+    ma21_lag1,
+    ma63_lag1,
+    stress_lag1,
+    elevated_lag1
+  ) %&gt;%
+  tidyr::drop_na()
+
+final_reg &lt;- lm(selected_formula, data = final_reg_data)
+
+saveRDS(final_reg, &quot;outputs/models/final_regression_model.rds&quot;)
+
+final_reg_summary &lt;- capture.output(summary(final_reg))
+writeLines(final_reg_summary, &quot;outputs/tables/final_regression_summary.txt&quot;)
+
+arima_resid &lt;- residuals(final_arima)
+reg_resid &lt;- residuals(final_reg)
+
+ljung_arima &lt;- Box.test(
+  arima_resid,
+  lag = 20,
+  type = &quot;Ljung-Box&quot;,
+  fitdf = length(final_arima$coef)
+)
+
+ljung_reg &lt;- Box.test(
+  reg_resid,
+  lag = 20,
+  type = &quot;Ljung-Box&quot;,
+  fitdf = length(coef(final_reg)) - 1
+)
+
+diagnostics_table &lt;- tibble(
+  model = c(&quot;ARIMA&quot;, &quot;Regression&quot;),
+  test = &quot;Ljung-Box&quot;,
+  lag = 20,
+  statistic = c(as.numeric(ljung_arima$statistic), as.numeric(ljung_reg$statistic)),
+  p_value = c(ljung_arima$p.value, ljung_reg$p.value),
+  interpretation = case_when(
+    p_value &lt; 0.05 ~ &quot;Residual autocorrelation remains; model may miss time-series structure.&quot;,
+    TRUE ~ &quot;No strong evidence of residual autocorrelation at 5% level.&quot;
+  )
+)
+
+write_csv(diagnostics_table, &quot;outputs/tables/ljung_box_tests.csv&quot;)
+
+png(&quot;outputs/plots/arima_residual_acf.png&quot;, width = 1000, height = 600)
+acf(arima_resid, main = &quot;ARIMA Residual ACF&quot;)
+dev.off()
+
+png(&quot;outputs/plots/arima_residual_pacf.png&quot;, width = 1000, height = 600)
+pacf(arima_resid, main = &quot;ARIMA Residual PACF&quot;)
+dev.off()
+
+png(&quot;outputs/plots/regression_residual_acf.png&quot;, width = 1000, height = 600)
+acf(reg_resid, main = &quot;Regression Residual ACF&quot;)
+dev.off()
+
+png(&quot;outputs/plots/regression_residual_pacf.png&quot;, width = 1000, height = 600)
+pacf(reg_resid, main = &quot;Regression Residual PACF&quot;)
+dev.off()
+
+cat(&quot;Saved residual diagnostics.\n&quot;)
+
+############################################################
+# 4. Fast regime-shift analysis using monthly log-VIX
+############################################################
+
+regime_input &lt;- vix %&gt;%
+  mutate(month = floor_date(date, &quot;month&quot;)) %&gt;%
+  group_by(month) %&gt;%
+  summarise(
+    log_vix = mean(log_vix, na.rm = TRUE),
+    vix = mean(vix, na.rm = TRUE),
+    .groups = &quot;drop&quot;
+  )
+
+bp_full &lt;- breakpoints(log_vix ~ 1, data = regime_input, h = 0.10)
+bic_values &lt;- BIC(bp_full)
+optimal_breaks &lt;- which.min(bic_values) - 1
+
+if (optimal_breaks &gt; 0) {
+  bp_opt &lt;- breakpoints(bp_full, breaks = optimal_breaks)
+  break_indices &lt;- bp_opt$breakpoints
+
+  regime_breaks &lt;- tibble(
+    break_number = seq_along(break_indices),
+    break_index = break_indices,
+    break_date = regime_input$month[break_indices],
+    break_vix = regime_input$vix[break_indices]
+  )
+} else {
+  regime_breaks &lt;- tibble(
+    break_number = integer(),
+    break_index = integer(),
+    break_date = as.Date(character()),
+    break_vix = numeric()
+  )
+}
+
+write_csv(regime_breaks, &quot;outputs/tables/regime_breaks.csv&quot;)
+
+p_breaks &lt;- ggplot(regime_input, aes(x = month, y = log_vix)) +
+  geom_line(linewidth = 0.35) +
+  labs(
+    title = &quot;Structural Break Diagnostic for Monthly Log-VIX&quot;,
+    subtitle = &quot;Vertical lines indicate estimated regime breaks selected by BIC&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;Monthly Average Log VIX&quot;
+  ) +
+  theme_minimal()
+
+if (nrow(regime_breaks) &gt; 0) {
+  p_breaks &lt;- p_breaks +
+    geom_vline(
+      data = regime_breaks,
+      aes(xintercept = break_date),
+      linetype = &quot;dashed&quot;
+    )
+}
+
+ggsave(&quot;outputs/plots/structural_breaks_log_vix.png&quot;, p_breaks, width = 10, height = 5, dpi = 300)
+
+cat(&quot;Saved regime-shift analysis.\n&quot;)
+
+############################################################
+# 5. Final summary
+############################################################
+
+summary_lines &lt;- c(
+  &quot;Volatility Forecasting &amp; Risk Signal Analysis | VIX Index | R&quot;,
+  &quot;&quot;,
+  paste(&quot;Data start:&quot;, min(vix$date)),
+  paste(&quot;Data end:&quot;, max(vix$date)),
+  paste(&quot;Clean observations:&quot;, nrow(vix)),
+  &quot;&quot;,
+  &quot;Models:&quot;,
+  &quot;- Rolling ARIMA and AIC-selected regression models for one-day-ahead log-VIX forecasting.&quot;,
+  &quot;- Final ARIMA forecast uses recent five-year data for fast, stable portfolio output generation.&quot;,
+  &quot;&quot;,
+  &quot;Evaluation:&quot;,
+  &quot;- Rolling one-day-ahead forecasts already completed in the main script.&quot;,
+  &quot;- Model comparison metrics saved in outputs/tables/model_comparison.csv.&quot;,
+  &quot;&quot;,
+  &quot;Diagnostics:&quot;,
+  &quot;- Residual ACF/PACF plots.&quot;,
+  &quot;- Ljung-Box residual tests.&quot;,
+  &quot;- Monthly log-VIX structural break diagnostics.&quot;,
+  &quot;&quot;,
+  &quot;Important interpretation:&quot;,
+  &quot;This project forecasts the VIX implied volatility index, not realised volatility directly.&quot;
+)
+
+writeLines(summary_lines, &quot;outputs/project_summary.txt&quot;)
+
+cat(&quot;\nFast finishing script complete.\n&quot;)
+
+</code></pre>
+    </section>
+
+    <section class="code-card" id="03-create-final-report-outputs-R">
+      <div class="code-head">
+        <div>
+          <h2>03_create_final_report_outputs.R</h2>
+          <p>Creates the final report tables, six figures, summary text and manifest.</p>
+        </div>
+        <div class="code-actions">
+          <button class="copy-btn" data-copy="03_create_final_report_outputs.R">Copy</button>
+          <a class="btn small" href="code/03_create_final_report_outputs.R">Raw file</a>
+        </div>
+      </div>
+      <pre><code id="03_create_final_report_outputs.R" class="language-r">
+############################################################
+# Final report outputs
+# VIX forecasting and risk signal project
+#
+# Run this after:
+# source(&quot;scripts/fast_finish.R&quot;)
+#
+# This creates the figures and tables used in the report.
+############################################################
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(ggplot2)
+library(forecast)
+
+############################################################
+# 1. Set up folders
+############################################################
+
+unlink(&quot;outputs/final_report&quot;, recursive = TRUE, force = TRUE)
+
+dir.create(&quot;outputs/final_report&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/final_report/figures&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/final_report/tables&quot;, recursive = TRUE, showWarnings = FALSE)
+dir.create(&quot;outputs/final_report/text&quot;, recursive = TRUE, showWarnings = FALSE)
+
+############################################################
+# 2. Load data
+############################################################
+
+required_files &lt;- c(
+  &quot;data/processed/vix_clean.csv&quot;,
+  &quot;outputs/tables/rolling_forecasts.csv&quot;,
+  &quot;outputs/tables/model_comparison.csv&quot;,
+  &quot;outputs/tables/vix_risk_signals.csv&quot;,
+  &quot;outputs/tables/ljung_box_tests.csv&quot;,
+  &quot;outputs/tables/final_arima_20_day_forecast.csv&quot;
+)
+
+missing_files &lt;- required_files[!file.exists(required_files)]
+
+if (length(missing_files) &gt; 0) {
+  stop(
+    paste(
+      &quot;Some files are missing. Run source(\&quot;scripts/fast_finish.R\&quot;) first. Missing:&quot;,
+      paste(missing_files, collapse = &quot;, &quot;)
+    )
+  )
+}
+
+vix &lt;- read_csv(&quot;data/processed/vix_clean.csv&quot;, show_col_types = FALSE)
+rolling_results &lt;- read_csv(&quot;outputs/tables/rolling_forecasts.csv&quot;, show_col_types = FALSE)
+model_comparison &lt;- read_csv(&quot;outputs/tables/model_comparison.csv&quot;, show_col_types = FALSE)
+signals &lt;- read_csv(&quot;outputs/tables/vix_risk_signals.csv&quot;, show_col_types = FALSE)
+ljung &lt;- read_csv(&quot;outputs/tables/ljung_box_tests.csv&quot;, show_col_types = FALSE)
+final_forecast &lt;- read_csv(&quot;outputs/tables/final_arima_20_day_forecast.csv&quot;, show_col_types = FALSE)
+
+vix$date &lt;- as.Date(vix$date)
+rolling_results$date &lt;- as.Date(rolling_results$date)
+signals$date &lt;- as.Date(signals$date)
+final_forecast$date &lt;- as.Date(final_forecast$date)
+
+# Keep only rows where the rolling thresholds are available.
+signals_clean &lt;- signals %&gt;%
+  filter(
+    !is.na(vix_q75_252_lag1),
+    !is.na(vix_q90_252_lag1)
+  )
+
+############################################################
+# 3. Tables
+############################################################
+
+data_summary &lt;- tibble(
+  metric = c(
+    &quot;Data start&quot;,
+    &quot;Data end&quot;,
+    &quot;Clean observations&quot;,
+    &quot;Rolling forecasts&quot;,
+    &quot;Risk signal observations&quot;
+  ),
+  value = c(
+    as.character(min(vix$date)),
+    as.character(max(vix$date)),
+    as.character(nrow(vix)),
+    as.character(nrow(rolling_results)),
+    as.character(nrow(signals_clean))
+  )
+)
+
+write_csv(data_summary, &quot;outputs/final_report/tables/table_1_data_summary.csv&quot;)
+
+model_comparison_report &lt;- model_comparison %&gt;%
+  mutate(
+    model = recode(model, arima = &quot;ARIMA&quot;, reg = &quot;Regression&quot;),
+    rmse_log = round(rmse_log, 4),
+    mae_log = round(mae_log, 4),
+    rmse_vix = round(rmse_vix, 4),
+    mae_vix = round(mae_vix, 4),
+    mape_vix = round(mape_vix, 2),
+    coverage_95_log_pct = round(100 * coverage_95_log, 2),
+    coverage_95_vix_pct = round(100 * coverage_95_vix, 2)
+  ) %&gt;%
+  dplyr::select(
+    model,
+    rmse_log,
+    mae_log,
+    rmse_vix,
+    mae_vix,
+    mape_vix,
+    coverage_95_log_pct,
+    coverage_95_vix_pct,
+    n_forecasts
+  )
+
+write_csv(model_comparison_report, &quot;outputs/final_report/tables/table_2_model_comparison.csv&quot;)
+
+regime_summary &lt;- signals_clean %&gt;%
+  group_by(risk_signal) %&gt;%
+  summarise(
+    observations = n(),
+    pct_of_days = round(100 * n() / nrow(signals_clean), 2),
+    avg_vix = round(mean(vix, na.rm = TRUE), 2),
+    median_vix = round(median(vix, na.rm = TRUE), 2),
+    max_vix = round(max(vix, na.rm = TRUE), 2),
+    avg_z_score = round(mean(z_252, na.rm = TRUE), 2),
+    .groups = &quot;drop&quot;
+  ) %&gt;%
+  arrange(desc(avg_vix))
+
+write_csv(regime_summary, &quot;outputs/final_report/tables/table_3_regime_summary.csv&quot;)
+
+regimes_by_year &lt;- signals_clean %&gt;%
+  filter(year(date) &gt;= 2022, year(date) &lt;= 2025) %&gt;%
+  group_by(year = year(date), risk_signal) %&gt;%
+  summarise(
+    days = n(),
+    avg_vix = round(mean(vix, na.rm = TRUE), 2),
+    max_vix = round(max(vix, na.rm = TRUE), 2),
+    .groups = &quot;drop&quot;
+  )
+
+write_csv(regimes_by_year, &quot;outputs/final_report/tables/table_4_risk_regimes_by_year.csv&quot;)
+
+ljung_report &lt;- ljung %&gt;%
+  mutate(
+    statistic = round(statistic, 4),
+    p_value = round(p_value, 4)
+  )
+
+write_csv(ljung_report, &quot;outputs/final_report/tables/table_5_ljung_box_tests.csv&quot;)
+
+forecast_report &lt;- final_forecast %&gt;%
+  dplyr::select(
+    date,
+    mean_vix,
+    lower80_vix,
+    upper80_vix,
+    lower95_vix,
+    upper95_vix
+  ) %&gt;%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+write_csv(forecast_report, &quot;outputs/final_report/tables/table_6_final_20_day_forecast.csv&quot;)
+
+latest_signal &lt;- signals_clean %&gt;%
+  slice_tail(n = 1) %&gt;%
+  dplyr::select(
+    date,
+    vix,
+    risk_signal,
+    z_252,
+    vix_q75_252_lag1,
+    vix_q90_252_lag1
+  ) %&gt;%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+write_csv(latest_signal, &quot;outputs/final_report/tables/table_7_latest_risk_signal.csv&quot;)
+
+############################################################
+# 4. Figure 1: VIX and rolling thresholds
+############################################################
+
+fig1 &lt;- ggplot(signals_clean, aes(x = date)) +
+  geom_line(aes(y = vix, linetype = &quot;VIX&quot;), linewidth = 0.35) +
+  geom_line(
+    aes(y = vix_q75_252_lag1, linetype = &quot;Elevated threshold&quot;),
+    linewidth = 0.35,
+    na.rm = TRUE
+  ) +
+  geom_line(
+    aes(y = vix_q90_252_lag1, linetype = &quot;Stress threshold&quot;),
+    linewidth = 0.35,
+    na.rm = TRUE
+  ) +
+  scale_linetype_manual(
+    values = c(
+      &quot;VIX&quot; = &quot;solid&quot;,
+      &quot;Elevated threshold&quot; = &quot;dashed&quot;,
+      &quot;Stress threshold&quot; = &quot;dotted&quot;
+    )
+  ) +
+  labs(
+    title = &quot;VIX with Rolling Risk Thresholds&quot;,
+    subtitle = &quot;Thresholds are based on the previous year of VIX data&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;,
+    linetype = &quot;Series&quot;
+  ) +
+  theme_minimal()
+
+ggsave(
+  &quot;outputs/final_report/figures/figure_1_vix_with_rolling_thresholds.png&quot;,
+  fig1,
+  width = 10,
+  height = 5,
+  dpi = 300
+)
+
+############################################################
+# 5. Figure 2: Rolling forecast comparison
+############################################################
+
+forecast_long &lt;- rolling_results %&gt;%
+  filter(date &gt;= max(date) - years(1)) %&gt;%
+  dplyr::select(date, actual_vix, arima_mean_vix, reg_mean_vix) %&gt;%
+  pivot_longer(
+    cols = c(actual_vix, arima_mean_vix, reg_mean_vix),
+    names_to = &quot;series&quot;,
+    values_to = &quot;vix&quot;
+  ) %&gt;%
+  mutate(
+    series = recode(
+      series,
+      actual_vix = &quot;Actual VIX&quot;,
+      arima_mean_vix = &quot;ARIMA forecast&quot;,
+      reg_mean_vix = &quot;Regression forecast&quot;
+    )
+  )
+
+fig2 &lt;- ggplot(forecast_long, aes(x = date, y = vix, linetype = series)) +
+  geom_line(linewidth = 0.5, na.rm = TRUE) +
+  scale_linetype_manual(
+    values = c(
+      &quot;Actual VIX&quot; = &quot;solid&quot;,
+      &quot;ARIMA forecast&quot; = &quot;dashed&quot;,
+      &quot;Regression forecast&quot; = &quot;dotted&quot;
+    )
+  ) +
+  labs(
+    title = &quot;One-Day-Ahead VIX Forecasts&quot;,
+    subtitle = &quot;Actual VIX compared with ARIMA and regression forecasts&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;,
+    linetype = &quot;Series&quot;
+  ) +
+  theme_minimal()
+
+ggsave(
+  &quot;outputs/final_report/figures/figure_2_rolling_forecast_comparison.png&quot;,
+  fig2,
+  width = 10,
+  height = 5,
+  dpi = 300
+)
+
+############################################################
+# 6. Figure 3: 20-day forecast
+############################################################
+
+fig3 &lt;- ggplot() +
+  geom_line(
+    data = vix %&gt;% filter(date &gt;= max(date) - years(2)),
+    aes(x = date, y = vix),
+    linewidth = 0.45
+  ) +
+  geom_ribbon(
+    data = final_forecast,
+    aes(x = date, ymin = lower95_vix, ymax = upper95_vix),
+    alpha = 0.2
+  ) +
+  geom_line(
+    data = final_forecast,
+    aes(x = date, y = mean_vix),
+    linetype = &quot;dashed&quot;,
+    linewidth = 0.55
+  ) +
+  labs(
+    title = &quot;20-Day VIX Forecast&quot;,
+    subtitle = &quot;ARIMA forecast with a 95% prediction range&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;VIX&quot;
+  ) +
+  theme_minimal()
+
+ggsave(
+  &quot;outputs/final_report/figures/figure_3_final_20_day_arima_forecast.png&quot;,
+  fig3,
+  width = 10,
+  height = 5,
+  dpi = 300
+)
+
+############################################################
+# 7. Figure 4: Risk regimes by year
+############################################################
+
+fig4 &lt;- regimes_by_year %&gt;%
+  ggplot(aes(x = factor(year), y = days, fill = risk_signal)) +
+  geom_col() +
+  labs(
+    title = &quot;VIX Risk Regimes by Year&quot;,
+    subtitle = &quot;Full calendar years from 2022 to 2025&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Number of trading days&quot;,
+    fill = &quot;Risk signal&quot;
+  ) +
+  theme_minimal()
+
+ggsave(
+  &quot;outputs/final_report/figures/figure_4_risk_regime_frequency_by_year.png&quot;,
+  fig4,
+  width = 10,
+  height = 5,
+  dpi = 300
+)
+
+############################################################
+# 8. Figure 5: Overall regime distribution
+############################################################
+
+fig5 &lt;- regime_summary %&gt;%
+  mutate(
+    risk_signal = factor(risk_signal, levels = c(&quot;Normal&quot;, &quot;Elevated&quot;, &quot;Stress&quot;))
+  ) %&gt;%
+  ggplot(aes(x = risk_signal, y = pct_of_days, fill = risk_signal)) +
+  geom_col() +
+  labs(
+    title = &quot;Overall VIX Risk Regime Split&quot;,
+    subtitle = &quot;Share of days classified as Normal, Elevated or Stress&quot;,
+    x = &quot;Risk regime&quot;,
+    y = &quot;Share of days (%)&quot;,
+    fill = &quot;Risk regime&quot;
+  ) +
+  theme_minimal()
+
+ggsave(
+  &quot;outputs/final_report/figures/figure_5_risk_regime_distribution.png&quot;,
+  fig5,
+  width = 8,
+  height = 5,
+  dpi = 300
+)
+
+############################################################
+# 9. Figure 6: ARIMA residual checks
+############################################################
+
+if (file.exists(&quot;outputs/models/final_arima_model_fast.rds&quot;)) {
+  final_arima &lt;- readRDS(&quot;outputs/models/final_arima_model_fast.rds&quot;)
+} else if (file.exists(&quot;outputs/models/final_arima_model.rds&quot;)) {
+  final_arima &lt;- readRDS(&quot;outputs/models/final_arima_model.rds&quot;)
+} else {
+  stop(&quot;No saved ARIMA model found. Run source(\&quot;scripts/fast_finish.R\&quot;) first.&quot;)
+}
+
+arima_resid &lt;- residuals(final_arima)
+
+png(
+  &quot;outputs/final_report/figures/figure_6_arima_residual_acf_pacf.png&quot;,
+  width = 1400,
+  height = 600
+)
+
+par(mfrow = c(1, 2), mar = c(4, 4, 4, 2))
+
+acf(
+  arima_resid,
+  lag.max = 40,
+  main = &quot;ACF of ARIMA Residuals&quot;,
+  xlab = &quot;Lag&quot;,
+  ylab = &quot;ACF&quot;
+)
+
+pacf(
+  arima_resid,
+  lag.max = 40,
+  main = &quot;PACF of ARIMA Residuals&quot;,
+  xlab = &quot;Lag&quot;,
+  ylab = &quot;PACF&quot;
+)
+
+dev.off()
+
+############################################################
+# 10. Plain results summary
+############################################################
+
+best_rmse_model &lt;- model_comparison_report %&gt;%
+  arrange(rmse_vix) %&gt;%
+  slice(1)
+
+arima_ljung &lt;- ljung_report %&gt;% filter(model == &quot;ARIMA&quot;)
+reg_ljung &lt;- ljung_report %&gt;% filter(model == &quot;Regression&quot;)
+
+summary_text &lt;- c(
+  &quot;Volatility Forecasting and Risk Signal Analysis&quot;,
+  &quot;&quot;,
+  &quot;Data&quot;,
+  paste0(&quot;The project uses daily VIX data from &quot;, min(vix$date), &quot; to &quot;, max(vix$date), &quot;.&quot;),
+  paste0(&quot;After cleaning, the sample contains &quot;, nrow(vix), &quot; observations.&quot;),
+  paste0(&quot;The rolling backtest contains &quot;, nrow(rolling_results), &quot; one-day-ahead forecasts.&quot;),
+  &quot;&quot;,
+  &quot;Model results&quot;,
+  paste0(&quot;ARIMA RMSE on VIX levels: &quot;, model_comparison_report$rmse_vix[model_comparison_report$model == &quot;ARIMA&quot;], &quot;.&quot;),
+  paste0(&quot;Regression RMSE on VIX levels: &quot;, model_comparison_report$rmse_vix[model_comparison_report$model == &quot;Regression&quot;], &quot;.&quot;),
+  paste0(&quot;The lowest RMSE came from the &quot;, best_rmse_model$model, &quot; model.&quot;),
+  paste0(&quot;ARIMA 95% interval coverage: &quot;, model_comparison_report$coverage_95_vix_pct[model_comparison_report$model == &quot;ARIMA&quot;], &quot;%.&quot;),
+  paste0(&quot;Regression 95% interval coverage: &quot;, model_comparison_report$coverage_95_vix_pct[model_comparison_report$model == &quot;Regression&quot;], &quot;%.&quot;),
+  &quot;&quot;,
+  &quot;Model checks&quot;,
+  paste0(&quot;ARIMA Ljung-Box p-value: &quot;, arima_ljung$p_value, &quot;.&quot;),
+  paste0(&quot;Regression Ljung-Box p-value: &quot;, reg_ljung$p_value, &quot;.&quot;),
+  &quot;The regression model was slightly more accurate, but the ARIMA residuals looked cleaner.&quot;,
+  &quot;&quot;,
+  &quot;Risk signals&quot;,
+  paste0(
+    &quot;Normal days: &quot;,
+    regime_summary$observations[regime_summary$risk_signal == &quot;Normal&quot;],
+    &quot; observations, &quot;,
+    regime_summary$pct_of_days[regime_summary$risk_signal == &quot;Normal&quot;],
+    &quot;% of the sample, average VIX &quot;,
+    regime_summary$avg_vix[regime_summary$risk_signal == &quot;Normal&quot;],
+    &quot;.&quot;
+  ),
+  paste0(
+    &quot;Elevated days: &quot;,
+    regime_summary$observations[regime_summary$risk_signal == &quot;Elevated&quot;],
+    &quot; observations, &quot;,
+    regime_summary$pct_of_days[regime_summary$risk_signal == &quot;Elevated&quot;],
+    &quot;% of the sample, average VIX &quot;,
+    regime_summary$avg_vix[regime_summary$risk_signal == &quot;Elevated&quot;],
+    &quot;.&quot;
+  ),
+  paste0(
+    &quot;Stress days: &quot;,
+    regime_summary$observations[regime_summary$risk_signal == &quot;Stress&quot;],
+    &quot; observations, &quot;,
+    regime_summary$pct_of_days[regime_summary$risk_signal == &quot;Stress&quot;],
+    &quot;% of the sample, average VIX &quot;,
+    regime_summary$avg_vix[regime_summary$risk_signal == &quot;Stress&quot;],
+    &quot;, maximum VIX &quot;,
+    regime_summary$max_vix[regime_summary$risk_signal == &quot;Stress&quot;],
+    &quot;.&quot;
+  ),
+  &quot;&quot;,
+  &quot;Note&quot;,
+  &quot;This project forecasts the VIX index itself. VIX is an implied volatility measure, so the project is not directly forecasting realised volatility.&quot;,
+  &quot;The risk signals are based only on past data, so the thresholds avoid look-ahead bias.&quot;
+)
+
+writeLines(summary_text, &quot;outputs/final_report/text/final_results_summary.txt&quot;)
+
+############################################################
+# 11. Manifest
+############################################################
+
+manifest &lt;- tibble(
+  item = c(
+    &quot;Figure 1&quot;,
+    &quot;Figure 2&quot;,
+    &quot;Figure 3&quot;,
+    &quot;Figure 4&quot;,
+    &quot;Figure 5&quot;,
+    &quot;Figure 6&quot;,
+    &quot;Table 1&quot;,
+    &quot;Table 2&quot;,
+    &quot;Table 3&quot;,
+    &quot;Table 4&quot;,
+    &quot;Table 5&quot;,
+    &quot;Table 6&quot;,
+    &quot;Table 7&quot;,
+    &quot;Text summary&quot;
+  ),
+  description = c(
+    &quot;VIX with rolling risk thresholds&quot;,
+    &quot;One-day-ahead forecast comparison&quot;,
+    &quot;20-day ARIMA forecast&quot;,
+    &quot;Risk regimes by year&quot;,
+    &quot;Overall regime split&quot;,
+    &quot;ARIMA residual ACF and PACF&quot;,
+    &quot;Data summary&quot;,
+    &quot;Model comparison&quot;,
+    &quot;Risk regime summary&quot;,
+    &quot;Risk regimes by year&quot;,
+    &quot;Ljung-Box tests&quot;,
+    &quot;20-day forecast table&quot;,
+    &quot;Latest risk signal&quot;,
+    &quot;Plain results summary&quot;
+  ),
+  path = c(
+    &quot;outputs/final_report/figures/figure_1_vix_with_rolling_thresholds.png&quot;,
+    &quot;outputs/final_report/figures/figure_2_rolling_forecast_comparison.png&quot;,
+    &quot;outputs/final_report/figures/figure_3_final_20_day_arima_forecast.png&quot;,
+    &quot;outputs/final_report/figures/figure_4_risk_regime_frequency_by_year.png&quot;,
+    &quot;outputs/final_report/figures/figure_5_risk_regime_distribution.png&quot;,
+    &quot;outputs/final_report/figures/figure_6_arima_residual_acf_pacf.png&quot;,
+    &quot;outputs/final_report/tables/table_1_data_summary.csv&quot;,
+    &quot;outputs/final_report/tables/table_2_model_comparison.csv&quot;,
+    &quot;outputs/final_report/tables/table_3_regime_summary.csv&quot;,
+    &quot;outputs/final_report/tables/table_4_risk_regimes_by_year.csv&quot;,
+    &quot;outputs/final_report/tables/table_5_ljung_box_tests.csv&quot;,
+    &quot;outputs/final_report/tables/table_6_final_20_day_forecast.csv&quot;,
+    &quot;outputs/final_report/tables/table_7_latest_risk_signal.csv&quot;,
+    &quot;outputs/final_report/text/final_results_summary.txt&quot;
+  )
+)
+
+write_csv(manifest, &quot;outputs/final_report/final_report_manifest.csv&quot;)
+
+cat(&quot;\nFinal report outputs created.\n&quot;)
+cat(&quot;Figures: outputs/final_report/figures\n&quot;)
+cat(&quot;Tables: outputs/final_report/tables\n&quot;)
+cat(&quot;Summary: outputs/final_report/text/final_results_summary.txt\n&quot;)
+cat(&quot;Manifest: outputs/final_report/final_report_manifest.csv\n&quot;)
+
+</code></pre>
+    </section>
 
   </div>
+
+  <script>
+    document.querySelectorAll('pre code').forEach((el) => hljs.highlightElement(el));
+
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-copy');
+        const code = document.getElementById(id);
+        if (!code) return;
+        try {
+          await navigator.clipboard.writeText(code.textContent);
+          const old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(() => btn.textContent = old, 1200);
+        } catch (err) {
+          btn.textContent = 'Copy failed';
+          setTimeout(() => btn.textContent = 'Copy', 1200);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
