@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>annuity_valuation.py preview</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <style>
+    :root{--bg:#0d1117;--panel:#111827;--text:#e5e7eb;--muted:#94a3b8;--line:#243044;--accent:#93c5fd}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    header{padding:12px 14px;border-bottom:1px solid var(--line);background:#0f172a;position:sticky;top:0;z-index:2}
+    h1{font-size:15px;margin:0 0 4px;color:#f8fafc}
+    p{font-size:12px;color:var(--muted);margin:0}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+    pre{margin:0;padding:16px;white-space:pre;overflow:auto;min-height:100vh}
+    .msg{padding:16px;color:var(--muted);font-size:13px;line-height:1.5}
+    .msg code{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <header><h1>annuity_valuation.py</h1><p>Fetched from <code>./code/annuity_valuation.py</code></p></header>
+  <pre><code id="code" class="language-python"></code></pre>
+  <script>
+    async function loadCode(){
+      const target='./code/annuity_valuation.py';
+      try{
+        const res=await fetch(target,{cache:'no-store'});
+        if(!res.ok) throw new Error('File not found');
+        const text=await res.text();
+        const el=document.getElementById('code');
+        el.textContent=text;
+        hljs.highlightElement(el);
+      }catch(e){
+        document.querySelector('pre').outerHTML='<div class="msg">Place your valuation script at <code>code/annuity_valuation.py</code> for this preview to load.</div>';
+      }
+    }
+    loadCode();
+  </script>
+</body>
+</html>
