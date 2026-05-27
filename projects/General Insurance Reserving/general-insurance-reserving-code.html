@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>General Insurance Reserving &amp; Claims Triangle Analysis — Code | Hassan Ahmed</title>
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:18px}
+    .top{
+      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+      box-shadow: var(--shadow);
+      background: rgba(17,24,39,.65);
+    }
+    .title{display:flex; flex-direction:column; gap:2px}
+    .muted{color:var(--muted); font-size:13px}
+    a.btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
+    }
+    a.btn:hover{background: rgba(255,255,255,.07)}
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 1000px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .panel.wide{ grid-column: 1 / -1; }
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background: rgba(17,24,39,.35);
+      box-shadow: var(--shadow);
+    }
+    .panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .panel-title{
+      font-weight:800;
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+    .panel-sub{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .viewer{
+      height: 520px;
+      background: rgba(17,24,39,.2);
+    }
+    .panel.wide .viewer{ height: 560px; }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .note code{
+      color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:12px;
+    }
+    .note a{ color:var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">
+        <div style="font-weight:800;">General Insurance Reserving &amp; Claims Triangle Analysis — Code</div>
+        <div class="muted">Preview of the R scripts behind the claims reserving project</div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="../../index.html">← Back</a>
+        <a class="btn" href="./general-insurance-reserving.html">PDF</a>
+        <a class="btn"
+           href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/General%20Insurance%20Reserving/code"
+           target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="panel wide">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Data Preparation & Triangle Checks</div>
+            <div class="panel-sub">01_prepare_triangles.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./01-prepare-triangles-r-preview.html" title="01_prepare_triangles.R code preview"></iframe></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Chain Ladder Reserving</div>
+            <div class="panel-sub">02_chain_ladder.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./02-chain-ladder-r-preview.html" title="02_chain_ladder.R code preview"></iframe></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Bornhuetter-Ferguson Reserving</div>
+            <div class="panel-sub">03_bornhuetter_ferguson.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./03-bornhuetter-ferguson-r-preview.html" title="03_bornhuetter_ferguson.R code preview"></iframe></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Mack Uncertainty</div>
+            <div class="panel-sub">04_mack_uncertainty.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./04-mack-uncertainty-r-preview.html" title="04_mack_uncertainty.R code preview"></iframe></div>
+      </section>
+    </div>
+
+    <div class="note">
+      Run order: <code>01_prepare_triangles.R</code> → <code>02_chain_ladder.R</code> → <code>03_bornhuetter_ferguson.R</code> → <code>04_mack_uncertainty.R</code>.
+      The full project folder is available through the <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/General%20Insurance%20Reserving" target="_blank" rel="noopener">GitHub</a> link.
+    </div>
+  </div>
+</body>
+</html>
