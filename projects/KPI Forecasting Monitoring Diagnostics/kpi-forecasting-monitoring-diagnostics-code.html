@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPI Forecasting &amp; Monitoring Diagnostics — Code | Hassan Ahmed</title>
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:18px}
+    .top{
+      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+      box-shadow: var(--shadow);
+      background: rgba(17,24,39,.65);
+    }
+    .title{display:flex; flex-direction:column; gap:2px}
+    .muted{color:var(--muted); font-size:13px}
+    a.btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
+    }
+    a.btn:hover{background: rgba(255,255,255,.07)}
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 1000px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background: rgba(17,24,39,.35);
+      box-shadow: var(--shadow);
+    }
+    .panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .panel-title{
+      font-weight:800;
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+    .panel-sub{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .viewer{
+      height: 520px;
+      background: rgba(17,24,39,.2);
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .note code{
+      color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:12px;
+    }
+    .note a{ color:var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">
+        <div style="font-weight:800;">KPI Forecasting &amp; Monitoring Diagnostics — Code</div>
+        <div class="muted">Preview of the R scripts behind the KPI forecasting, diagnostics and alerting workflow</div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="../../index.html">← Back</a>
+        <a class="btn" href="./kpi-forecasting-monitoring-diagnostics.html">PDF</a>
+        <a class="btn"
+           href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/KPI%20Forecasting%20Monitoring%20Diagnostics/code"
+           target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Synthetic KPI Data Build</div>
+            <div class="panel-sub">01_generate_synthetic_kpis.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./01-generate-synthetic-kpis-r-preview.html" title="01_generate_synthetic_kpis.R code preview"></iframe></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Forecast Models &amp; Rolling Evaluation</div>
+            <div class="panel-sub">02_forecast_models.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./02-forecast-models-r-preview.html" title="02_forecast_models.R code preview"></iframe></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Monitoring Diagnostics &amp; Alerts</div>
+            <div class="panel-sub">03_monitoring_diagnostics.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./03-monitoring-diagnostics-r-preview.html" title="03_monitoring_diagnostics.R code preview"></iframe></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Dashboard Report Build</div>
+            <div class="panel-sub">04_create_dashboard_report.R</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./04-create-dashboard-report-r-preview.html" title="04_create_dashboard_report.R code preview"></iframe></div>
+      </section>
+    </div>
+
+    <div class="note">
+      Run order: <code>01_generate_synthetic_kpis.R</code> → <code>02_forecast_models.R</code> → <code>03_monitoring_diagnostics.R</code> → <code>04_create_dashboard_report.R</code>.
+      The full project folder is available through the <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/KPI%20Forecasting%20Monitoring%20Diagnostics" target="_blank" rel="noopener">GitHub</a> link.
+    </div>
+  </div>
+</body>
+</html>
