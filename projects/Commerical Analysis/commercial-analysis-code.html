@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Commercial Analysis & Strategic Insight — Code | Hassan Ahmed</title>
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:18px}
+    .top{
+      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+      box-shadow: var(--shadow);
+      background: rgba(17,24,39,.65);
+    }
+    .title{display:flex; flex-direction:column; gap:2px}
+    .muted{color:var(--muted); font-size:13px}
+    a.btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
+    }
+    a.btn:hover{background: rgba(255,255,255,.07)}
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 1000px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .panel.wide{ grid-column: 1 / -1; }
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background: rgba(17,24,39,.35);
+      box-shadow: var(--shadow);
+    }
+    .panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .panel-title{
+      font-weight:800;
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+    .panel-sub{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .viewer{
+      height: 520px;
+      background: rgba(17,24,39,.2);
+    }
+    .panel.wide .viewer{ height: 560px; }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .note code{
+      color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:12px;
+    }
+    .note a{ color:var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">
+        <div style="font-weight:800;">Commercial Analysis &amp; Strategic Insight — Code</div>
+        <div class="muted">Preview of the Python and SQL workflow behind the IBM Telco churn analysis project</div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="../../index.html">← Back</a>
+        <a class="btn" href="./commercial-analysis.html">PDF</a>
+        <a class="btn"
+           href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Commerical%20Analysis/code"
+           target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="panel wide">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">SQL Data Cleaning &amp; Feature Build</div>
+            <div class="panel-sub">01_data_cleaning_sql.py</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./01-data-cleaning-sql-py-preview.html" title="01_data_cleaning_sql.py code preview"></iframe></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Commercial EDA &amp; Segmentation</div>
+            <div class="panel-sub">02_commercial_eda.py</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./02-commercial-eda-py-preview.html" title="02_commercial_eda.py code preview"></iframe></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Churn Model &amp; Report Generation</div>
+            <div class="panel-sub">03_churn_model_and_report.py</div>
+          </div>
+        </div>
+        <div class="viewer"><iframe src="./03-churn-model-and-report-py-preview.html" title="03_churn_model_and_report.py code preview"></iframe></div>
+      </section>
+    </div>
+
+    <div class="note">
+      Run order: <code>01_data_cleaning_sql.py</code> → <code>02_commercial_eda.py</code> → <code>03_churn_model_and_report.py</code>.
+      The full project folder is available through the <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Commerical%20Analysis" target="_blank" rel="noopener">GitHub</a> link.
+    </div>
+  </div>
+</body>
+</html>
