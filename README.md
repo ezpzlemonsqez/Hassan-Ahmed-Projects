@@ -67,7 +67,7 @@ Each project folder contains the report page, code preview page and supporting p
 
 ## Notes
 
-Some raw datasets are not included where they are public, external or unnecessary for viewing the project. The repository focuses on final reports, reproducible code and clean portfolio presentation.
+AI tools may have been used to support drafting, formatting, debugging and wording refinement. All modelling choices, code review, interpretation, validation and final project outputs were checked and owned by me.
 
 ## Contact
 
