@@ -95,6 +95,15 @@
     .card h2{margin:0 0 10px; font-size:21px}
     .muted{color:var(--muted)}
 
+    .section-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .section-head p{margin:0; color:var(--muted)}
+
     .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:10px}
     .item{
       padding:13px;
@@ -123,6 +132,7 @@
 
     .item[data-href]{ cursor:pointer; }
 
+    .full{grid-column: span 12}
     .col6{grid-column: span 12}
     @media (min-width: 960px){
       .col6{grid-column: span 6}
@@ -135,67 +145,14 @@
       opacity:.9;
     }
 
-    .acc{margin-top:14px; display:grid; gap:12px}
-    details.acc-item{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      background: rgba(255,255,255,.03);
-      overflow:hidden;
-    }
-    summary.acc-head{
-      cursor:pointer;
-      list-style:none;
-      padding:13px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .about-grid{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
       gap:12px;
     }
-    summary.acc-head::-webkit-details-marker{display:none}
-    .acc-left{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      min-width:0;
-    }
-    .acc-title{
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      font-size:12px;
-      color:var(--muted);
-    }
-    .acc-sub{
-      font-size:14px;
-      color:var(--text);
-      opacity:.92;
-    }
-    .acc-right{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .chev{
-      width:28px; height:28px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--muted);
-      font-weight:900;
-      transition: transform .12s ease;
-      user-select:none;
-    }
-    details[open] .chev{ transform: rotate(90deg); }
-    .acc-body{ padding:0 13px 13px; }
-    .acc-body .list{ margin-top:0; }
-
-    .about-stack{display:grid; gap:12px; margin-top:12px}
     .about-note{
+      grid-column: span 12;
       padding:13px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.08);
@@ -204,13 +161,58 @@
       justify-content:space-between;
       gap:12px;
     }
+    @media (min-width: 900px){
+      .about-note{grid-column: span 4}
+    }
     .about-note strong{display:block; margin-bottom:4px; color:var(--text)}
     .about-note span{color:#b9c2d0; font-size:14.5px}
+
+    .project-card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      background: rgba(255,255,255,.025);
+      padding:14px;
+    }
+    .project-card h3{
+      margin:0;
+      font-size:18px;
+      color:var(--text);
+    }
+    .project-card .sub{
+      margin:4px 0 0;
+      color:#b9c2d0;
+      font-size:14.5px;
+    }
+    .project-card .topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .contact-list{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .contact-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+    }
+    .contact-row span{color:#b9c2d0}
     @media (max-width: 720px){
       header{padding:20px 18px}
       .cta{justify-content:flex-start}
       .item{flex-direction:column}
       .item .meta{justify-content:flex-start}
+      .section-head, .project-card .topline, .contact-row{flex-direction:column; align-items:flex-start}
     }
   </style>
 </head>
@@ -243,146 +245,14 @@
     </header>
 
     <main class="grid">
-      <section class="card col6">
-        <div class="inner">
-          <h2>Projects</h2>
-          <p class="muted">Click a section to expand. Each project includes a report and code preview where available.</p>
-
-          <div class="acc">
-
-            <details class="acc-item" open>
-              <summary class="acc-head">
-                <div class="acc-left">
-                  <div class="acc-title">Quantitative Finance Research</div>
-                  <div class="acc-sub">Rough volatility, portfolio optimisation, derivatives and market risk.</div>
-                </div>
-                <div class="acc-right">
-                  <span class="pill">4 projects</span>
-                  <span class="chev">›</span>
-                </div>
-              </summary>
-
-              <div class="acc-body">
-                <ul class="list">
-                  <li class="item link-card" data-href="projects/MSc%20Project/rough-volatility.html" tabindex="0" role="link" aria-label="Open Rough Volatility Estimation MSc project PDF">
-                    <div class="left">
-                      <div class="name">Rough Volatility Estimation (MSc)</div>
-                      <div class="desc">Implemented roughness and Hurst estimators; validated behaviour through Monte Carlo simulation and intraday volatility experiments.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/MSc%20Project/rough-volatility-code.html">Code</a>
-                      <a class="pill" href="projects/MSc%20Project/rough-volatility.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/Portfolio%20Optimisation/portfolio-optimisation.html" tabindex="0" role="link" aria-label="Open CAPM-Informed Mean-Variance Portfolio Optimisation project PDF">
-                    <div class="left">
-                      <div class="name">CAPM-Informed Mean–Variance Portfolio Optimisation</div>
-                      <div class="desc">Built a sector ETF strategy using rolling CAPM betas, Ledoit–Wolf covariance shrinkage, constrained Markowitz optimisation, walk-forward backtesting, VaR/ES and sensitivity analysis.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/Portfolio%20Optimisation/portfolio-optimisation-code.html">Code</a>
-                      <a class="pill" href="projects/Portfolio%20Optimisation/portfolio-optimisation.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis.html" tabindex="0" role="link" aria-label="Open Volatility Forecasting and Risk Signal Analysis project PDF">
-                    <div class="left">
-                      <div class="name">Volatility Forecasting &amp; Risk Signal Analysis</div>
-                      <div class="desc">Forecasted log-VIX using ARIMA and AIC-selected regression models; evaluated rolling one-day-ahead forecasts and classified volatility regimes using rolling thresholds.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis-code.html">Code</a>
-                      <a class="pill" href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing.html" tabindex="0" role="link" aria-label="Open Derivatives Pricing and Greeks Engine project PDF">
-                    <div class="left">
-                      <div class="name">Derivatives Pricing &amp; Greeks Engine</div>
-                      <div class="desc">Built an options pricing workflow with Monte Carlo and finite-difference methods, Greeks, hedge-ratio analysis and validation checks.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing-code.html">Code</a>
-                      <a class="pill" href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing.html">PDF</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </details>
-
-            <details class="acc-item" open>
-              <summary class="acc-head">
-                <div class="acc-left">
-                  <div class="acc-title">Financial Mathematics &amp; Risk</div>
-                  <div class="acc-sub">Cashflow valuation, reserving, KPI monitoring and commercial analysis.</div>
-                </div>
-                <div class="acc-right">
-                  <span class="pill">4 projects</span>
-                  <span class="chev">›</span>
-                </div>
-              </summary>
-
-              <div class="acc-body">
-                <ul class="list">
-                  <li class="item link-card" data-href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation.html" tabindex="0" role="link" aria-label="Open Annuity Liability Valuation and Sensitivity project PDF">
-                    <div class="left">
-                      <div class="name">Annuity Liability Valuation &amp; Sensitivity</div>
-                      <div class="desc">Modelled survival-weighted annuity cashflows using HMD UK period life tables and a Bank of England nominal gilt spot curve, with rate, longevity, mortality, inflation and expense sensitivities.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation-code.html">Code</a>
-                      <a class="pill" href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/General%20Insurance%20Reserving/general-insurance-reserving.html" tabindex="0" role="link" aria-label="Open General Insurance Reserving and Claims Triangle Analysis project PDF">
-                    <div class="left">
-                      <div class="name">General Insurance Reserving &amp; Claims Triangle Analysis</div>
-                      <div class="desc">Analysed paid and incurred claims triangles using Chain Ladder and Bornhuetter–Ferguson methods, with reserve estimates, diagnostics and uncertainty checks.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/General%20Insurance%20Reserving/general-insurance-reserving-code.html">Code</a>
-                      <a class="pill" href="projects/General%20Insurance%20Reserving/general-insurance-reserving.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics.html" tabindex="0" role="link" aria-label="Open KPI Forecasting and Monitoring Diagnostics project PDF">
-                    <div class="left">
-                      <div class="name">KPI Forecasting &amp; Monitoring Diagnostics</div>
-                      <div class="desc">Built ARIMA and AIC-selected regression models for synthetic insurance and operational KPIs, with rolling forecast evaluation, Ljung–Box residual checks, KPI movement monitoring and anomaly alerts.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics-code.html">Code</a>
-                      <a class="pill" href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics.html">PDF</a>
-                    </div>
-                  </li>
-
-                  <li class="item link-card" data-href="projects/Commerical%20Analysis/commercial-analysis.html" tabindex="0" role="link" aria-label="Open Commercial Analysis and Strategic Insight project PDF">
-                    <div class="left">
-                      <div class="name">Commercial Analysis &amp; Strategic Insight</div>
-                      <div class="desc">Analysed 7,032 IBM Telco customers using Python and SQL; identified churn concentrations by contract, tenure, payment method and charge band, then built logistic regression risk bands to support retention prioritisation.</div>
-                    </div>
-                    <div class="meta">
-                      <a class="pill" href="projects/Commerical%20Analysis/commercial-analysis-code.html">Code</a>
-                      <a class="pill" href="projects/Commerical%20Analysis/commercial-analysis.html">PDF</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <section class="card col6">
+      <section class="card full">
         <div class="inner">
           <h2>About</h2>
           <p class="muted">
-            I’m a quant-focused MSc Financial Mathematics graduate who enjoys building reliable models and turning them into usable tools. I’m especially interested in derivatives, time series, risk and analytics, and I care about validation and clear reporting as much as results.
+            I’m a quant-focused MSc Financial Mathematics graduate who enjoys building reliable models and turning them into usable tools. I’m especially interested in derivatives, time series, risk, actuarial analytics and commercial insight, with an emphasis on validation, diagnostics and clear reporting.
           </p>
 
-          <div class="about-stack">
+          <div class="about-grid">
             <div class="about-note">
               <div>
                 <strong>What I’m looking for</strong>
@@ -401,11 +271,163 @@
 
             <div class="about-note">
               <div>
-                <strong>Contact</strong>
-                <span>Email: <a href="mailto:hassan23.anoor@gmail.com">hassan23.anoor@gmail.com</a></span><br>
-                <span>LinkedIn: <a href="https://www.linkedin.com/in/hassan-ahmed-72a840235/" target="_blank" rel="noopener">linkedin.com/in/hassan-ahmed-72a840235</a></span>
+                <strong>Core tools</strong>
+                <span>Python, R, SQL, C++, LaTeX, model validation, reporting, dashboards and GitHub Pages project presentation.</span>
               </div>
-              <div class="meta"><span class="pill">Open to roles</span></div>
+              <div class="meta"><span class="pill">Modelling</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card full">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <h2>Projects</h2>
+              <p>Selected projects split between quantitative finance research and finance/risk analytics.</p>
+            </div>
+            <span class="pill">8 projects</span>
+          </div>
+
+          <div class="grid">
+            <section class="project-card col6">
+              <div class="topline">
+                <div>
+                  <h3>Quantitative Finance Research</h3>
+                  <p class="sub">Rough volatility, portfolio optimisation, derivatives and market risk.</p>
+                </div>
+                <span class="pill">4 projects</span>
+              </div>
+
+              <ul class="list">
+                <li class="item link-card" data-href="projects/MSc%20Project/rough-volatility.html" tabindex="0" role="link" aria-label="Open Rough Volatility Estimation MSc project PDF">
+                  <div class="left">
+                    <div class="name">Rough Volatility Estimation (MSc)</div>
+                    <div class="desc">Implemented roughness and Hurst estimators; validated behaviour through Monte Carlo simulation and intraday volatility experiments.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/MSc%20Project/rough-volatility-code.html">Code</a>
+                    <a class="pill" href="projects/MSc%20Project/rough-volatility.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/Portfolio%20Optimisation/portfolio-optimisation.html" tabindex="0" role="link" aria-label="Open CAPM-Informed Mean-Variance Portfolio Optimisation project PDF">
+                  <div class="left">
+                    <div class="name">CAPM-Informed Mean–Variance Portfolio Optimisation</div>
+                    <div class="desc">Built a sector ETF strategy using rolling CAPM betas, Ledoit–Wolf covariance shrinkage, constrained Markowitz optimisation, walk-forward backtesting, VaR/ES and sensitivity analysis.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/Portfolio%20Optimisation/portfolio-optimisation-code.html">Code</a>
+                    <a class="pill" href="projects/Portfolio%20Optimisation/portfolio-optimisation.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis.html" tabindex="0" role="link" aria-label="Open Volatility Forecasting and Risk Signal Analysis project PDF">
+                  <div class="left">
+                    <div class="name">Volatility Forecasting &amp; Risk Signal Analysis</div>
+                    <div class="desc">Forecasted log-VIX using ARIMA and AIC-selected regression models; evaluated rolling one-day-ahead forecasts and classified volatility regimes using rolling thresholds.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis-code.html">Code</a>
+                    <a class="pill" href="projects/Volatility%20Forecasting%20Risk%20Signal%20Analysis/volatility-forecasting-risk-signal-analysis.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing.html" tabindex="0" role="link" aria-label="Open Derivatives Pricing and Greeks Engine project PDF">
+                  <div class="left">
+                    <div class="name">Derivatives Pricing &amp; Greeks Engine</div>
+                    <div class="desc">Built an options pricing workflow with Monte Carlo and finite-difference methods, Greeks, hedge-ratio analysis and validation checks.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing-code.html">Code</a>
+                    <a class="pill" href="projects/Option%20Pricing%20Project%20%28MC%20v%20CN%29/option-pricing.html">PDF</a>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="project-card col6">
+              <div class="topline">
+                <div>
+                  <h3>Finance, Risk &amp; Analytics</h3>
+                  <p class="sub">Cashflow valuation, reserving, KPI monitoring and commercial analysis.</p>
+                </div>
+                <span class="pill">4 projects</span>
+              </div>
+
+              <ul class="list">
+                <li class="item link-card" data-href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation.html" tabindex="0" role="link" aria-label="Open Annuity Liability Valuation and Sensitivity project PDF">
+                  <div class="left">
+                    <div class="name">Annuity Liability Valuation &amp; Sensitivity</div>
+                    <div class="desc">Modelled survival-weighted annuity cashflows using HMD UK period life tables and a Bank of England nominal gilt spot curve, with rate, longevity, mortality, inflation and expense sensitivities.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation-code.html">Code</a>
+                    <a class="pill" href="projects/Annuity%20Liability%20Valuation/annuity-liability-valuation.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/General%20Insurance%20Reserving/general-insurance-reserving.html" tabindex="0" role="link" aria-label="Open General Insurance Reserving and Claims Triangle Analysis project PDF">
+                  <div class="left">
+                    <div class="name">General Insurance Reserving &amp; Claims Triangle Analysis</div>
+                    <div class="desc">Analysed paid and incurred claims triangles using Chain Ladder and Bornhuetter–Ferguson methods, with reserve estimates, diagnostics and uncertainty checks.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/General%20Insurance%20Reserving/general-insurance-reserving-code.html">Code</a>
+                    <a class="pill" href="projects/General%20Insurance%20Reserving/general-insurance-reserving.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics.html" tabindex="0" role="link" aria-label="Open KPI Forecasting and Monitoring Diagnostics project PDF">
+                  <div class="left">
+                    <div class="name">KPI Forecasting &amp; Monitoring Diagnostics</div>
+                    <div class="desc">Built ARIMA and AIC-selected regression models for synthetic insurance and operational KPIs, with rolling forecast evaluation, Ljung–Box residual checks, KPI movement monitoring and anomaly alerts.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics-code.html">Code</a>
+                    <a class="pill" href="projects/KPI%20Forecasting%20Monitoring%20Diagnostics/kpi-forecasting-monitoring-diagnostics.html">PDF</a>
+                  </div>
+                </li>
+
+                <li class="item link-card" data-href="projects/Commercial%20Analysis/commercial-analysis.html" tabindex="0" role="link" aria-label="Open Commercial Analysis and Strategic Insight project PDF">
+                  <div class="left">
+                    <div class="name">Commercial Analysis &amp; Strategic Insight</div>
+                    <div class="desc">Analysed 7,032 IBM Telco customers using Python and SQL; identified churn concentrations by contract, tenure, payment method and charge band, then built logistic regression risk bands to support retention prioritisation.</div>
+                  </div>
+                  <div class="meta">
+                    <a class="pill" href="projects/Commercial%20Analysis/commercial-analysis-code.html">Code</a>
+                    <a class="pill" href="projects/Commercial%20Analysis/commercial-analysis.html">PDF</a>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="card full">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <h2>Contact</h2>
+              <p>Open to quantitative finance, risk, actuarial analytics and data/finance analytics roles.</p>
+            </div>
+            <span class="pill">Open to roles</span>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-row">
+              <span>Email</span>
+              <a href="mailto:hassan23.anoor@gmail.com">hassan23.anoor@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span>LinkedIn</span>
+              <a href="https://www.linkedin.com/in/hassan-ahmed-72a840235/" target="_blank" rel="noopener">linkedin.com/in/hassan-ahmed-72a840235</a>
+            </div>
+            <div class="contact-row">
+              <span>GitHub</span>
+              <a href="https://github.com/ezpzlemonsqez" target="_blank" rel="noopener">github.com/ezpzlemonsqez</a>
             </div>
           </div>
         </div>
