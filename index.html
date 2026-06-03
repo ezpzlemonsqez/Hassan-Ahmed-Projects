@@ -146,26 +146,57 @@
     }
 
     .about-grid{
-      margin-top:12px;
+      margin-top:18px;
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap:12px;
+      gap:14px;
+      align-items:stretch;
     }
     .about-note{
       grid-column: span 12;
-      padding:13px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.035);
+      padding:20px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.09);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.025));
       display:flex;
-      justify-content:space-between;
-      gap:12px;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      text-align:center;
+      gap:10px;
+      min-height:170px;
     }
     @media (min-width: 900px){
       .about-note{grid-column: span 4}
     }
-    .about-note strong{display:block; margin-bottom:4px; color:var(--text)}
-    .about-note span{color:#b9c2d0; font-size:14.5px}
+    .about-note strong{
+      display:block;
+      color:var(--text);
+      font-size:16px;
+      line-height:1.25;
+    }
+    .about-note span{
+      color:#b9c2d0;
+      font-size:14.5px;
+      line-height:1.55;
+      max-width:34ch;
+    }
+    .about-note .mini{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:max-content;
+      max-width:100%;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid rgba(96,165,250,.22);
+      background: rgba(96,165,250,.07);
+      color:#c7d2fe;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
 
     .project-card{
       border:1px solid rgba(255,255,255,.08);
@@ -254,27 +285,21 @@
 
           <div class="about-grid">
             <div class="about-note">
-              <div>
-                <strong>What I’m looking for</strong>
-                <span>Quant, investment analytics, ALM, pricing, actuarial/risk analytics and data analytics roles where I can build models and communicate them clearly.</span>
-              </div>
-              <div class="meta"><span class="pill">London / UK</span></div>
+              <div class="mini">London / UK</div>
+              <strong>What I’m looking for</strong>
+              <span>Quant, investment analytics, ALM, pricing, actuarial/risk analytics and data analytics roles where I can build models and communicate them clearly.</span>
             </div>
 
             <div class="about-note">
-              <div>
-                <strong>What I’m good at</strong>
-                <span>Clean data → correct maths → robust testing → clear reporting. I care about diagnostics and explainability, not just outputs.</span>
-              </div>
-              <div class="meta"><span class="pill">Testing</span><span class="pill">Documentation</span></div>
+              <div class="mini">Testing + Reporting</div>
+              <strong>What I’m good at</strong>
+              <span>Clean data → correct maths → robust testing → clear reporting. I care about diagnostics and explainability, not just outputs.</span>
             </div>
 
             <div class="about-note">
-              <div>
-                <strong>Core tools</strong>
-                <span>Python, R, SQL, C++, LaTeX, model validation, reporting, dashboards and GitHub Pages project presentation.</span>
-              </div>
-              <div class="meta"><span class="pill">Modelling</span></div>
+              <div class="mini">Core Stack</div>
+              <strong>Core tools</strong>
+              <span>Python, R, SQL, C++, LaTeX, model validation, reporting, dashboards and GitHub Pages project presentation.</span>
             </div>
           </div>
         </div>
