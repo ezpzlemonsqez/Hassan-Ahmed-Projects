@@ -48,6 +48,7 @@ https://ezpzlemonsqez.github.io/Hassan-Ahmed-Projects/
 
 ## Repository Structure
 
+```text
 .
 ├── index.html
 ├── projects/
@@ -60,6 +61,7 @@ https://ezpzlemonsqez.github.io/Hassan-Ahmed-Projects/
 │   ├── KPI Forecasting Monitoring/
 │   └── Commerical Analysis/
 └── README.md
+```
 
 Each project folder contains the report page, code preview page and supporting project files needed for the GitHub Pages portfolio.
 
