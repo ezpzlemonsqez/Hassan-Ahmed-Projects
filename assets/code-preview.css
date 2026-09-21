@@ -1,0 +1,29 @@
+/* Source previews remain dark and monospace inside the paper-coloured readers. */
+:root { color-scheme: dark; --bg: #18221f; --text: #e2e8dd; --muted: #a3b1a7; --line: #33433b; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+.source-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.source-name { overflow-wrap: anywhere; flex: 1; min-width: 0; }
+.source-actions { display: flex; gap: 14px; align-items: center; }
+.source-actions a, .source-actions button { color: var(--text); font: inherit; text-decoration: none; background: none; border: 0; padding: 6px 0; cursor: pointer; }
+.source-actions a:hover, .source-actions button:hover { text-decoration: underline; text-underline-offset: 4px; }
+.source-actions button:disabled { color: var(--muted); cursor: default; }
+:focus-visible { outline: 2px solid #a3c9b0; outline-offset: 3px; }
+pre { margin: 0; padding: 19px; overflow: auto; tab-size: 4; }
+code { font: 12px/1.7 "SFMono-Regular", Consolas, "Liberation Mono", monospace; white-space: pre; }
+.source-error, noscript { display: block; color: #ead6ac; padding: 16px; font: 13px/1.7 system-ui, sans-serif; margin: 0; }
+.source-error a, noscript a { color: inherit; }
+[hidden] { display: none !important; }
+.hljs { color: var(--text); background: transparent; }
+.hljs-comment, .hljs-quote { color: #91a398; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #b7cda7; }
+.hljs-string, .hljs-regexp, .hljs-addition { color: #d6c796; }
+.hljs-number, .hljs-symbol, .hljs-bullet, .hljs-variable { color: #dfb99c; }
+.hljs-title, .hljs-section, .hljs-attribute, .hljs-title.function_ { color: #a6cdd1; }
+.hljs-built_in, .hljs-type, .hljs-template-variable { color: #cfbbd4; }
+.hljs-meta, .hljs-doctag { color: #bdccad; }
+.hljs-deletion { color: #e5a49b; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: bold; }
+::selection { background: #476253; color: white; }
+@media (max-width: 500px) { pre { padding: 15px; } code { font-size: 11px; } }

@@ -1,139 +1,50 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Annuity Liability Valuation &amp; Sensitivity Analysis — Code | Hassan Ahmed</title>
-
-  <style>
-    :root{
-      --bg:#0b0f17;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --line:rgba(255,255,255,.10);
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: var(--bg);
-      color: var(--text);
-    }
-    .wrap{max-width:1200px; margin:0 auto; padding:18px}
-    .top{
-      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
-      box-shadow: var(--shadow);
-      background: rgba(17,24,39,.65);
-    }
-    .title{display:flex; flex-direction:column; gap:2px}
-    .muted{color:var(--muted); font-size:13px}
-    a.btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
-    }
-    a.btn:hover{background: rgba(255,255,255,.07)}
-
-    .grid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
-    @media (min-width: 1000px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-      .panel.wide{ grid-column: 1 / -1; }
-    }
-
-    .panel{
-      border:1px solid var(--line);
-      border-radius:14px;
-      overflow:hidden;
-      background: rgba(17,24,39,.35);
-      box-shadow: var(--shadow);
-    }
-    .panel-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      padding:10px 12px;
-      border-bottom:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-    }
-    .panel-title{
-      font-weight:800;
-      font-size:14px;
-      letter-spacing:.02em;
-    }
-    .panel-sub{
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .viewer{
-      height: 520px;
-      background: rgba(17,24,39,.2);
-    }
-    .panel.wide .viewer{ height: 560px; }
-
-    iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      background:#fff;
-    }
-
-    .note{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .note code{
-      color:var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size:12px;
-    }
-    .note a{ color:var(--text); }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Annuity Liability Valuation &amp; Sensitivity — Code | Hassan Ahmed</title>
+  <meta name="description" content="Modelled survival-weighted annuity cashflows using HMD UK period life tables and a Bank of England nominal gilt spot curve, with rate, longevity, mortality, inflation and expense sensitivities.">
+  <meta name="theme-color" content="#f6f5ef">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="title">
-        <div style="font-weight:800;">Annuity Liability Valuation &amp; Sensitivity Analysis — Code</div>
-        <div class="muted">Preview of the Python valuation model behind the annuity BEL and sensitivity analysis project</div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="container">
+    <header class="site-header reader-header">
+      <a class="identity" href="../../index.html" aria-label="Hassan Ahmed — portfolio home">
+      <span class="monogram" aria-hidden="true">HA</span>
+      <span class="identity-text">HASSAN AHMED<small>QUANTITATIVE FINANCE &amp; ANALYTICS</small></span>
+    </a>
+      <nav class="site-nav" aria-label="Portfolio navigation">
+        <a href="../../index.html#projects">← All projects</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </header>
+    <main class="reader-main" id="main">
+      <div class="reader-heading">
+        <div class="eyebrow">05 / Finance, risk &amp; analytics / Implementation</div>
+        <h1>Annuity Liability Valuation &amp; Sensitivity</h1>
+        <p>Modelled survival-weighted annuity cashflows using HMD UK period life tables and a Bank of England nominal gilt spot curve, with rate, longevity, mortality, inflation and expense sensitivities.</p>
       </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="../../index.html">← Back</a>
-        <a class="btn" href="./annuity-liability-valuation.html">PDF</a>
-        <a class="btn"
-           href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Annuity%20Liability%20Valuation/code"
-           target="_blank" rel="noopener">GitHub</a>
+      <div class="reader-toolbar">
+        <nav class="reader-tabs" aria-label="Project resources">
+          <a href="./annuity-liability-valuation.html">Report <span class="muted">/ PDF</span></a>
+          <a href="./annuity-liability-valuation-code.html" aria-current="page">Code</a>
+          <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Annuity%20Liability%20Valuation/code" target="_blank" rel="noopener noreferrer">GitHub<span class="arrow" aria-hidden="true">↗</span></a>
+        </nav>
       </div>
-    </div>
-
-    <div class="grid">
-      <section class="panel wide">
-        <div class="panel-head">
-          <div>
-            <div class="panel-title">Valuation Model</div>
-            <div class="panel-sub">annuity_valuation.py</div>
-          </div>
-        </div>
-        <div class="viewer"><iframe src="./annuity-valuation-py-preview.html" title="annuity_valuation.py code preview"></iframe></div>
-      </section>
-    </div>
-
-    <div class="note">
-      Main file: <code>annuity_valuation.py</code>. The script cleans the mortality and curve inputs, builds survival-weighted annuity cashflows, calculates the BEL, runs sensitivity scenarios and exports Excel/chart outputs.
-      The full project folder is available through the <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Annuity%20Liability%20Valuation" target="_blank" rel="noopener">GitHub</a> link.
-    </div>
+      <div class="code-grid">
+        <section class="code-panel wide" aria-label="Valuation Model">
+          <div class="panel-heading"><h2>Valuation Model</h2><p>annuity_valuation.py</p></div>
+          <iframe src="./annuity-valuation-py-preview.html" title="annuity_valuation.py — source code" loading="eager"></iframe>
+        </section>
+      </div>
+      <div class="reader-note">Main file: <code>annuity_valuation.py</code>. The script cleans the mortality and curve inputs, builds survival-weighted annuity cashflows, calculates the BEL, runs sensitivity scenarios and exports Excel/chart outputs.
+      The full project folder is available through the <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Annuity%20Liability%20Valuation" target="_blank" rel="noopener">GitHub</a> link.</div>
+    </main>
+    <footer class="site-footer"><span>© Hassan Ahmed</span><a href="../../index.html#projects">← Back to projects</a></footer>
   </div>
 </body>
 </html>

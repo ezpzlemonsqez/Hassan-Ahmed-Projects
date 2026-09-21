@@ -1,92 +1,44 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Option Pricing (MC vs Crank-Nicolson) | Hassan Ahmed</title>
-
-  <style>
-    :root{
-      --bg:#0b0f17;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --line:rgba(255,255,255,.10);
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: var(--bg);
-      color: var(--text);
-    }
-    .wrap{max-width:1100px; margin:0 auto; padding:18px}
-    .top{
-      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      border:1px solid var(--line); border-radius:14px; padding:12px 14px;
-      box-shadow: var(--shadow);
-      background: rgba(17,24,39,.65);
-    }
-    .title{display:flex; flex-direction:column; gap:2px}
-    .muted{color:var(--muted); font-size:13px}
-    a.btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text); text-decoration:none; font-weight:700; font-size:14px;
-    }
-    a.btn:hover{background: rgba(255,255,255,.07)}
-
-    .viewer{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      overflow:hidden;
-      background: rgba(17,24,39,.35);
-      height: calc(100vh - 120px);
-      min-height: 520px;
-    }
-    iframe{
-      width:100%;
-      height:100%;
-      border:0;
-      background:#fff;
-    }
-
-    .fallback{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .fallback a{color:var(--text)}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Derivatives Pricing &amp; Greeks Engine — Report | Hassan Ahmed</title>
+  <meta name="description" content="Built an options pricing workflow with Monte Carlo and finite-difference methods, Greeks, hedge-ratio analysis and validation checks.">
+  <meta name="theme-color" content="#f6f5ef">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="title">
-        <div style="font-weight:800;">Option Pricing (Monte Carlo vs Crank-Nicolson)</div>
-        <div class="muted">Embedded PDF viewer</div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="container">
+    <header class="site-header reader-header">
+      <a class="identity" href="../../index.html" aria-label="Hassan Ahmed — portfolio home">
+      <span class="monogram" aria-hidden="true">HA</span>
+      <span class="identity-text">HASSAN AHMED<small>QUANTITATIVE FINANCE &amp; ANALYTICS</small></span>
+    </a>
+      <nav class="site-nav" aria-label="Portfolio navigation">
+        <a href="../../index.html#projects">← All projects</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </header>
+    <main class="reader-main" id="main">
+      <div class="reader-heading">
+        <div class="eyebrow">04 / Quantitative finance / Research report</div>
+        <h1>Derivatives Pricing &amp; Greeks Engine</h1>
+        <p>Built an options pricing workflow with Monte Carlo and finite-difference methods, Greeks, hedge-ratio analysis and validation checks.</p>
       </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="../../index.html">← Back</a>
-        <a class="btn" href="./option-pricing-code.html">Code</a>
-        <a class="btn"
-           href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Option%20Pricing%20Project%20(MC%20v%20CN)/code/CEV_BBG_Project"
-           target="_blank" rel="noopener">GitHub</a>
+      <div class="reader-toolbar">
+        <nav class="reader-tabs" aria-label="Project resources">
+          <a href="./option-pricing.html" aria-current="page">Report <span class="muted">/ PDF</span></a>
+          <a href="./option-pricing-code.html">Code</a>
+          <a href="https://github.com/ezpzlemonsqez/Hassan-Ahmed-Projects/tree/main/projects/Option%20Pricing%20Project%20(MC%20v%20CN)/code/CEV_BBG_Project" target="_blank" rel="noopener noreferrer">GitHub<span class="arrow" aria-hidden="true">↗</span></a>
+        </nav><a class="text-link" href="./Option_Pricing_MC_CN.pdf" target="_blank" rel="noopener noreferrer">Open PDF<span class="arrow" aria-hidden="true">↗</span></a>
       </div>
-    </div>
-
-    <div class="viewer">
-      <iframe src="./Option_Pricing_MC_CN.pdf" title="Option Pricing PDF"></iframe>
-    </div>
-
-    <div class="fallback">
-      If the embedded PDF doesn’t load on your device, use
-      <a href="./Option_Pricing_MC_CN.pdf" target="_blank" rel="noopener">Open PDF</a>.
-    </div>
+      <div class="pdf-viewer"><iframe src="./Option_Pricing_MC_CN.pdf" title="Derivatives Pricing &amp; Greeks Engine — PDF report"></iframe></div>
+      <p class="reader-note">For a full-screen view, or if your browser doesn’t display the report, <a href="./Option_Pricing_MC_CN.pdf" target="_blank" rel="noopener noreferrer">open the PDF</a>.</p>
+    </main>
+    <footer class="site-footer"><span>© Hassan Ahmed</span><a href="../../index.html#projects">← Back to projects</a></footer>
   </div>
 </body>
 </html>
